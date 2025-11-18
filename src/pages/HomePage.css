@@ -1,0 +1,19 @@
+.task-manager-container{
+  border: 1px solid black;
+}
+
+.task-manager-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid black;
+}
+
+.task-manager-card{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.task-manager-date{
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
