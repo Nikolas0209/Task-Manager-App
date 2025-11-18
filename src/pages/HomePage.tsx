@@ -8,24 +8,39 @@ function HomePage(){
          <p>TASK MANAGER SUMMARY</p>
       </div>
       <div className="task-manager-cards">
-       <div className="task-manager-card">
-          <div className="task-manager-date">
+        <div className="task-manager-date yesterday-class">
             YESTERDAY
-          </div>
-          card1
         </div>
-        <div className="task-manager-card">
-        <div className="task-manager-date">
+        <div className="task-manager-date today-class">
             TODAY
-          </div>
-          card2
+        </div>
+        <div className="task-manager-date tomorrow-class">
+            TOMORROW
         </div>
         <div className="task-manager-card">
-        <div className="task-manager-date">
-            TOMORROW
-          </div>
-          card3
+          <ul className="todo-list">
+            <li>Wash dishes</li>
+            <li>Watch TV</li>
+            <li>Go outside</li>
+          </ul>
         </div>
+      
+        <div className="task-manager-card">
+          <ul className="todo-list">
+            <li>Wash dishes</li>
+            <li>Watch TV</li>
+            <li>Go outside</li>
+          </ul>
+        </div>
+
+        <div className="task-manager-card">
+          <ul className="todo-list">
+            <li>Wash dishes</li>
+            <li>Watch TV</li>
+            <li>Go outside</li>
+          </ul>
+        </div>
+
       </div>
      </div>
 

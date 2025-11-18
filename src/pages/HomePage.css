@@ -1,16 +1,65 @@
+body{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .task-manager-container{
   border: 1px solid black;
+  border-radius: 5px;
+}
+
+.task-manager-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: royalblue;
+  color: white
 }
 
 .task-manager-cards{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  border-top: 1px solid black;
+  border: none;
+}
+
+.task-manager-date{
+  font-weight: bold;
+  color: white;
+}
+
+.yesterday-class{
+  background-color: orange;
+}
+
+.today-class{
+  background-color: red;
+}
+
+.tomorrow-class{
+  background-color: green;
 }
 
 .task-manager-card{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   border-left: 1px solid black;
   border-right: 1px solid black;
+}
+
+.todo-list{
+  list-style: none;      
+  padding-left: 4px;
+  margin: 0;
+  text-align: left; 
+}
+
+.todo-list li{
+  padding: 5px;
+  font-size: 18px;
+}
+
+.todo-list li::before {
+  content: "- ";    
 }
 
 .task-manager-date{
