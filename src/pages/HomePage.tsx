@@ -27,8 +27,14 @@ function HomePage(){
           card3
         </div>
       </div>
-     
      </div>
+
+     <div className="past-tasks-button-container">
+      <button className="past-tasks-review-button">
+        See all previous tasks
+      </button>
+     </div>
+
     </>
   )
 };

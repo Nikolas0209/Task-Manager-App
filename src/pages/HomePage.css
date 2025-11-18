@@ -17,3 +17,19 @@
   border-bottom: 1px solid black;
   padding: 10px;
 }
+
+.past-tasks-button-container{
+ display: flex; 
+ padding-top: 30px;
+}
+
+.past-tasks-review-button{
+  padding: 15px 20px;
+  background-color: royalblue;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
