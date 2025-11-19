@@ -3,7 +3,15 @@ import './HomePage.css';
 function HomePage(){
   return(
     <>
-     <div className="task-manager-container">
+     <div className="input-container">
+       <input type="text" className="search-input" 
+        name="newTask"
+        placeholder="Add new task here"/>
+       <button className="add-button">
+        Add
+       </button>
+     </div>
+     <div className="task-manager-summary-container">
       <div className="task-manager-header">
          <p>TASK MANAGER SUMMARY</p>
       </div>
