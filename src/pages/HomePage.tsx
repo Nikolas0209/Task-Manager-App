@@ -1,8 +1,14 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function HomePage(){
   const navigate = useNavigate(); 
+  const [isInstructions, setIsInstructions] = useState<boolean>(false);
+
+  const toggleInstructions = (): void => {
+    setIsInstructions(prev => !prev);
+  } 
 
   const taskHistory = (): void => {
     navigate('/task-history');
@@ -10,6 +16,7 @@ function HomePage(){
 
   return(
     <>
+    <div className={`${isInstructions ? 'blurred' : ''}`}>
      <div className="title-wrapper">
        <h1 className="task-manager-title">
           Task Manager App
@@ -71,11 +78,27 @@ function HomePage(){
       <button className="past-tasks-review-button" onClick={taskHistory} >
         See all previous tasks
       </button>
-      <a href="" className="instructions-link">
-        Instructions
-      </a>
+      
+      <button
+        className="instructions-button" onClick={toggleInstructions}
+         disabled={isInstructions}>
+         instructions
+      </button>
+      </div>
      </div>
-
+        {isInstructions &&
+         <div className="instructions-section">
+          <div className="instructions-go-back-button-wrapper">
+           <button className="instructions-go-back-button" 
+             onClick={toggleInstructions}>
+             Go Back
+           </button>
+          </div>
+          <div className="instructions-on">
+            Welcome to instructions
+          </div>
+         </div>
+        }
     </>
   )
 };

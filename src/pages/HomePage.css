@@ -1,6 +1,18 @@
 body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  background-color: lightgray;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+button:disabled:hover{
+  opacity: 0.5;
+}
+
+.blurred{
+  filter: blur(4px);
 }
 
 .title-wrapper{
@@ -119,6 +131,49 @@ body{
   cursor: pointer;
 }
 
-.instructions-link{
+.instructions-button{
   color: royalblue;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  font-size: 15px;
 }
+
+.instructions-section{
+  position: fixed;
+  left: 200px;
+  right: 200px;
+  top: 110px
+}
+
+.instructions-go-back-button-wrapper{
+  display: flex;
+  padding-bottom: 25px;
+}
+
+.instructions-go-back-button{
+  padding: 10px 15px;
+  background-color: royalblue;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.instructions-button:hover{
+  opacity: 0.8;
+}
+
+.instructions-button:active{
+  opacity: 0.5;
+}
+
+.instructions-on{
+  color: royalblue;
+  background-color: white;
+  border: 2px solid royalblue;
+  border-radius: 5px;
+}
+
