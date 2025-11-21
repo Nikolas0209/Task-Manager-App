@@ -1,10 +1,26 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  type Task = {
+    id: number,
+    task: string,
+    isFinished: boolean,
+    createdAt: Date;
+  }
+
+  type ApiTask = {
+    userId: number;
+    id: number;
+    title: string;
+    completed: boolean;
+  };
 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -13,6 +29,27 @@ function HomePage(){
   const taskHistory = (): void => {
     navigate('/task-history');
   }
+
+  useEffect(() => {
+    const fetchTasks = async (): Promise<void> => {
+      try{
+        const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+
+        const realDataDisplay: Task[] = response.data.map((task: ApiTask) => ({
+          id: task.id,
+          task: task.title,
+          isFinished: task.completed,
+          createdAt: new Date() 
+        }))
+
+        setTasks(realDataDisplay);
+      } catch(error){
+        console.log('Cannot load the data. Please try again later.' ,error);
+      }
+    }
+
+    fetchTasks();
+  }, []);
 
   return(
     <>
@@ -57,9 +94,15 @@ function HomePage(){
       
         <div className="task-manager-card">
           <ul className="todo-list">
-            <li>Wash dishes</li>
-            <li>Watch TV</li>
-            <li>Go outside</li>
+            { tasks.map(task => {
+                return (
+                  <li key={task.id}>
+                    {task.task} {task.isFinished ? '✅': '❌'} 
+                    {new Date(task.createdAt).toLocaleDateString()}
+                  </li>
+                )
+              })
+            }
           </ul>
         </div>
 
