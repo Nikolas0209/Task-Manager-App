@@ -2,19 +2,21 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import TodaysTaskList from './TodaysTaskList';
+
+export type Task = {
+  id: number,
+  task: string,
+  isFinished?: boolean,
+  createdAt: Date;
+}
 
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [tasks, setTasks] = useState<Task[]>([]);
-
-  type Task = {
-    id: number,
-    task: string,
-    isFinished: boolean,
-    createdAt: Date;
-  }
-
+ 
+ 
   type ApiTask = {
     userId: number;
     id: number;
@@ -29,6 +31,7 @@ function HomePage(){
   const taskHistory = (): void => {
     navigate('/task-history');
   }
+
 
   useEffect(() => {
     const fetchTasks = async (): Promise<void> => {
@@ -96,10 +99,7 @@ function HomePage(){
           <ul className="todo-list">
             { tasks.map(task => {
                 return (
-                  <li key={task.id}>
-                    {task.task} {task.isFinished ? '✅': '❌'} 
-                    {new Date(task.createdAt).toLocaleDateString()}
-                  </li>
+                 <TodaysTaskList task={task} key={task.id}/>
                 )
               })
             }

@@ -1,0 +1,13 @@
+.task-details{
+  position: absolute;
+  background-color: rgb(118, 118, 118);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 5px;
+  right: 205px;
+}
+
+.task-state-container{
+  display: flex;
+  justify-content: space-between;
+}

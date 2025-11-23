@@ -103,6 +103,8 @@ button:disabled:hover{
 .todo-list li{
   padding: 5px;
   font-size: 18px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .todo-list li::before {
@@ -176,4 +178,5 @@ button:disabled:hover{
   border: 2px solid royalblue;
   border-radius: 5px;
 }
+
 
