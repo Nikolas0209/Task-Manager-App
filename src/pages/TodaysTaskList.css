@@ -4,10 +4,15 @@
   color: white;
   padding: 10px 12px;
   border-radius: 5px;
-  right: 205px;
+  right: 148px;
 }
 
 .task-state-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-task-container{
   display: flex;
   justify-content: space-between;
 }

@@ -15,7 +15,7 @@ function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [tasks, setTasks] = useState<Task[]>([]);
- 
+  const [taskDetails, setTaskDetails] = useState <number | null>(null);
  
   type ApiTask = {
     userId: number;
@@ -99,7 +99,7 @@ function HomePage(){
           <ul className="todo-list">
             { tasks.map(task => {
                 return (
-                 <TodaysTaskList task={task} key={task.id}/>
+                 <TodaysTaskList task={task} key={task.id} taskDetails={taskDetails} setTaskDetails={setTaskDetails}/>
                 )
               })
             }
