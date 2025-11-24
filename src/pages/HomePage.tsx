@@ -1,6 +1,6 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import TodaysTaskList from './TodaysTaskList';
 
@@ -32,8 +32,25 @@ function HomePage(){
     navigate('/task-history');
   }
 
+  const fetchTasks = useCallback(async(): Promise<void> => {
+    try{
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
 
+      const realDataDisplay: Task[] = response.data.map((task: ApiTask) => ({
+        id: task.id,
+        task: task.title,
+        isFinished: task.completed,
+        createdAt: new Date() 
+      }))
+
+      setTasks(realDataDisplay);
+    } catch(error){
+      console.log('Cannot load the data. Please try again later.', error);
+    }
+  },[]);
+   
   useEffect(() => {
+    /*
     const fetchTasks = async (): Promise<void> => {
       try{
         const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
@@ -47,12 +64,12 @@ function HomePage(){
 
         setTasks(realDataDisplay);
       } catch(error){
-        console.log('Cannot load the data. Please try again later.' ,error);
+        console.log('Cannot load the data. Please try again later.', error);
       }
     }
-
+    */
     fetchTasks();
-  }, []);
+  }, [fetchTasks])
 
   return(
     <>
@@ -99,7 +116,7 @@ function HomePage(){
           <ul className="todo-list">
             { tasks.map(task => {
                 return (
-                 <TodaysTaskList task={task} key={task.id} taskDetails={taskDetails} setTaskDetails={setTaskDetails}/>
+                 <TodaysTaskList task={task} key={task.id} taskDetails={taskDetails} setTaskDetails={setTaskDetails} fetchTasks={fetchTasks}/>
                 )
               })
             }
