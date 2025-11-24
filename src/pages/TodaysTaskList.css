@@ -11,19 +11,21 @@
 .task-state-container{
   display: flex;
   justify-content: space-between;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 }
 
 .delete-task-container{
   display: flex;
   justify-content: space-between;
-  padding-top: 5px;
+  padding-top: 10px;
+  align-items: flex-end;
 }
 
 .more-info-button-container{
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 2px;
 }
 
 .more-info-button{
@@ -35,4 +37,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.delete-task-button{
+  cursor: pointer;
+}
+
+.bin-image{
+  height: 20px;
 }

@@ -1,6 +1,7 @@
 import './TodaysTaskList.css';
 import type { Task } from './HomePage';
 import axios from 'axios';
+import bin from '../assets/bin.png';
 
 type TodaysTaskListProp = {
   task: Task,
@@ -50,7 +51,7 @@ function TodaysTaskList({ task, taskDetails, setTaskDetails, fetchTasks }: Today
          <div className="delete-task-container">
            Delete Task:
            <button className="delete-task-button" onClick={deleteTask}>
-            del
+             <img src={bin} className="bin-image"/>
            </button>
          </div>
         </div> 

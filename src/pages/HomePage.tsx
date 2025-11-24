@@ -15,7 +15,7 @@ function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [taskDetails, setTaskDetails] = useState <number | null>(null);
+  const [taskDetails, setTaskDetails] = useState <string | null>(null);
  
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -83,11 +83,11 @@ function HomePage(){
       
         <div className="task-manager-card">
           <ul className="todo-list">
-            { tasks.map(task => {
-                return (
-                 <TodaysTaskList task={task} key={task.id} taskDetails={taskDetails} setTaskDetails={setTaskDetails} fetchTasks={fetchTasks}/>
-                )
-              })
+            {tasks.map(task => {
+              return (
+               <TodaysTaskList task={task} key={task.id} taskDetails={taskDetails} setTaskDetails={setTaskDetails} fetchTasks={fetchTasks}/>
+              )
+             })
             }
           </ul>
         </div>
