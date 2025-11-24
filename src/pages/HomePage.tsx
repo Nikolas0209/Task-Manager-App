@@ -5,10 +5,10 @@ import axios from 'axios';
 import TodaysTaskList from './TodaysTaskList';
 
 export type Task = {
-  id: number,
+  createdAt: Date,
   task: string,
   isFinished?: boolean,
-  createdAt: Date;
+  id: string,
 }
 
 function HomePage(){
@@ -17,13 +17,6 @@ function HomePage(){
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskDetails, setTaskDetails] = useState <number | null>(null);
  
-  type ApiTask = {
-    userId: number;
-    id: number;
-    title: string;
-    completed: boolean;
-  };
-
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
   } 
@@ -34,40 +27,16 @@ function HomePage(){
 
   const fetchTasks = useCallback(async(): Promise<void> => {
     try{
-      const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
+      console.log(response.data);
 
-      const realDataDisplay: Task[] = response.data.map((task: ApiTask) => ({
-        id: task.id,
-        task: task.title,
-        isFinished: task.completed,
-        createdAt: new Date() 
-      }))
-
-      setTasks(realDataDisplay);
+      setTasks(response.data);
     } catch(error){
       console.log('Cannot load the data. Please try again later.', error);
     }
   },[]);
    
   useEffect(() => {
-    /*
-    const fetchTasks = async (): Promise<void> => {
-      try{
-        const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
-
-        const realDataDisplay: Task[] = response.data.map((task: ApiTask) => ({
-          id: task.id,
-          task: task.title,
-          isFinished: task.completed,
-          createdAt: new Date() 
-        }))
-
-        setTasks(realDataDisplay);
-      } catch(error){
-        console.log('Cannot load the data. Please try again later.', error);
-      }
-    }
-    */
     fetchTasks();
   }, [fetchTasks])
 

@@ -3,9 +3,9 @@ import type { Task } from './HomePage';
 import axios from 'axios';
 
 type TodaysTaskListProp = {
-  task: Task
-  taskDetails: number | null,
-  setTaskDetails: React.Dispatch<React.SetStateAction<number | null >>,
+  task: Task,
+  taskDetails: string | null,
+  setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>,
   fetchTasks: () => Promise<void>
 };
 
@@ -18,7 +18,7 @@ function TodaysTaskList({ task, taskDetails, setTaskDetails, fetchTasks }: Today
 
   const deleteTask = async(): Promise<void> => {
     try{
-    const result = await axios.delete(`https://jsonplaceholder.typicode.com/todos/${task.id}`);
+    const result = await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks/${task.id}`);
     console.log(result)
     } catch(error){
       console.log('Could not delete the task. Please try again later.', error);
@@ -32,9 +32,11 @@ function TodaysTaskList({ task, taskDetails, setTaskDetails, fetchTasks }: Today
   <>
     <li>
       {task.task} 
-      <button className="" onClick={toggleTaskDetails}>
-        ...
-      </button>
+      <div className="more-info-button-container">
+        <button className="more-info-button" onClick={toggleTaskDetails}>
+          ...
+        </button>
+      </div>
       {isOpen && (
         <div className="task-details">
         <div className="task-state-container">

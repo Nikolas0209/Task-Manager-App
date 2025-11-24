@@ -5,14 +5,34 @@
   padding: 10px 12px;
   border-radius: 5px;
   right: 148px;
+  font-size: 18px;
 }
 
 .task-state-container{
   display: flex;
   justify-content: space-between;
+  padding-bottom: 5px;
 }
 
 .delete-task-container{
   display: flex;
   justify-content: space-between;
+  padding-top: 5px;
+}
+
+.more-info-button-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.more-info-button{
+  background-color: royalblue;
+  color: white;
+  font-weight: bold;
+  height: 25px;
+  width: 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
