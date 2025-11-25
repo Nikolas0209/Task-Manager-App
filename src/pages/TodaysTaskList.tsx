@@ -20,6 +20,7 @@ function TodaysTaskList({ task, taskDetails, setTaskDetails, fetchTasks }: Today
   const deleteTask = async(): Promise<void> => {
     try{
     const result = await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks/${task.id}`);
+    setTaskDetails(null)
     console.log(result)
     } catch(error){
       console.log('Could not delete the task. Please try again later.', error);
@@ -32,7 +33,7 @@ function TodaysTaskList({ task, taskDetails, setTaskDetails, fetchTasks }: Today
  return(
   <>
     <li>
-      {task.task} 
+     {task.task} 
       <div className="more-info-button-container">
         <button className="more-info-button" onClick={toggleTaskDetails}>
           ...
