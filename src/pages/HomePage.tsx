@@ -19,6 +19,7 @@ function HomePage(){
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [addTask, setAddTask] = useState <string>('');
   const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
+  const [tasksYesterday, setTasksYesterday] = useState<Task[]>([]);
 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -47,10 +48,22 @@ function HomePage(){
     }
   }, []);
 
+  const fetchTasksYesterday = useCallback(async(): Promise<void> => {
+    try{
+      const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday');
+      setTasksYesterday(response.data);
+      console.log(response);
+    }
+    catch(error){
+      console.log("Could not load yesterday's tasks. Please try again later.", error);
+    }
+  }, []);
+
   useEffect(() => {
    fetchTasks();
    fetchTasksTomorrow();
-  }, [fetchTasks, fetchTasksTomorrow])
+   fetchTasksYesterday()
+  }, [fetchTasks, fetchTasksTomorrow, fetchTasksYesterday])
 
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAddTask(event.target.value);
