@@ -5,28 +5,24 @@ import bin from '../assets/bin.png';
 
 type TodaysTaskListProp = {
   task: Task,
-  taskDetails: string | null,
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>,
-  fetchTasks: () => Promise<void>
+  fetchTasks: () => Promise<void>,
+  isOpen: boolean,
+  toggleTaskDetails: () => void
 };
 
-function TodaysTaskList({ task, taskDetails, setTaskDetails, fetchTasks }: TodaysTaskListProp){
-  const isOpen = taskDetails === task.id;
-
-  const toggleTaskDetails = (): void => {
-    setTaskDetails(prev => (prev === task.id ? null : task.id ));
-  };
+function TodaysTaskList({ task,  setTaskDetails, fetchTasks, isOpen, toggleTaskDetails }: TodaysTaskListProp){
 
   const deleteTask = async(): Promise<void> => {
     try{
      await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks/${task.id}`);
-     setTaskDetails(null)
+     setTaskDetails(null);
     } catch(error){
       console.log('Could not delete the task. Please try again later.', error);
     }
 
     await fetchTasks();
-  }
+  };
 
  return(
    <li>

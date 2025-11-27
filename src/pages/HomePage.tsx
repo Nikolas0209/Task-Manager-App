@@ -55,7 +55,7 @@ function HomePage(){
 
     fetchTasksTomorrow();
 
-  }, [setTasksTomorrow]);
+  }, []);
  
 
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -122,8 +122,15 @@ function HomePage(){
         <div className="task-manager-card">
           <ul className="todo-list">
             {tasks.map(task => {
+               const isOpen = taskDetails === task.id;
+
+               const toggleTaskDetails = (): void => {
+                setTaskDetails(prev => (prev === task.id ? null : task.id ));
+               };
+
               return (
-               <TodaysTaskList task={task} key={task.id} taskDetails={taskDetails} setTaskDetails={setTaskDetails} fetchTasks={fetchTasks} />
+               <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
+                fetchTasks={fetchTasks} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails}/>
               )
              })
             }
@@ -133,8 +140,15 @@ function HomePage(){
         <div className="task-manager-card">
           <ul className="todo-list">
             {tasksTomorrow.map(task => {
+               const isOpen = taskDetails === task.id;
+
+               const toggleTaskDetails = (): void => {
+                setTaskDetails(prev => (prev === task.id ? null : task.id ));
+               };
+
               return(
-                <TomorrowsTaskList task={task} key={task.id}/>
+                <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 
+                 toggleTaskDetails={toggleTaskDetails}/>
               )
             })
             }

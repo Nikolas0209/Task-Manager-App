@@ -1,38 +1,48 @@
 import './TomorrowsTaskList.css';
-import axios from 'axios';
-import { useEffect } from 'react';
 import type { Task } from './HomePage';
+import bin from '../assets/bin.png';
+import axios from 'axios';
 
 type TaskToday = {
   task: Task,
-  //setTasksTomorrow: React.Dispatch<React.SetStateAction<Task[]>>
+  isOpen: boolean
+  //setTasksTomorrow: React.Dispatch<React.SetStateAction<Task[]>>,
+  toggleTaskDetails: () => void
 }
 
-function TomorrowsTaskList({task}: TaskToday){
+function TomorrowsTaskList({ task, isOpen, toggleTaskDetails }: TaskToday){
   
-  /*
-  useEffect(() => {
-    const fetchTasksTomorrow = async(): Promise<void> => {
-     try{
-      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
-      setTasksTomorrow(response.data);
-      console.log(response);
-     } 
-     catch(error){
-      console.log("Could not load today's tasks. Please try again later", error);
-     }
-    } 
-
-    fetchTasksTomorrow();
-
-  }, [setTasksTomorrow]);
-*/
+  
 
   return(
     <>
-     <li>
-       {task.task}
-     </li>
+        <li>
+    {task.task} 
+    <div className="more-info-button-container">
+      <button className="more-info-button" onClick={toggleTaskDetails}>
+        ...
+      </button>
+    </div>
+    {isOpen && (
+      <div className="task-details">
+      <div className="task-state-container">
+        Select status:
+        <div>
+          <button className="finished-task">✅</button>
+          <button className="unfinished-task">❌</button>
+        </div>
+      </div>
+        Assigned on: {new Date(task.createdAt).toLocaleDateString()}
+        <div className="delete-task-container">
+          Delete Task:
+          <button className="delete-task-button" >
+            <img src={bin} className="bin-image"/>
+          </button>
+        </div>
+      </div> 
+      )
+    }
+   </li> 
     </>
   )
 }
