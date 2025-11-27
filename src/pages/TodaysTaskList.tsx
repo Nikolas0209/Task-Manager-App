@@ -11,7 +11,7 @@ type TodaysTaskListProp = {
   toggleTaskDetails: () => void
 };
 
-function TodaysTaskList({ task,  setTaskDetails, fetchTasks, isOpen, toggleTaskDetails }: TodaysTaskListProp){
+function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDetails }: TodaysTaskListProp){
 
   const deleteTask = async(): Promise<void> => {
     try{

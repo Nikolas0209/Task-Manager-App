@@ -41,7 +41,6 @@ function HomePage(){
     try{
      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
      setTasksTomorrow(response.data);
-     console.log(response);
     } 
     catch(error){
      console.log("Could not load today's tasks. Please try again later", error);
@@ -59,14 +58,27 @@ function HomePage(){
 
   const addTodaysTask = async(): Promise<void> => {
     try{
-     const result = await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks/', {task: addTask,
+      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks', {task: addTask,
       isFinished: false,
       createdAt: new Date().toISOString()
      });
-      console.log(result)
       await fetchTasks();
     } catch(error){
       console.log('Could not add a task. Please try again later.', error);
+    }
+  }
+
+  const addTomorrowsTask = async(): Promise<void> => {
+    try{
+      axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
+        task: addTask,
+        isFinished: false,
+        createdAt: new Date().toISOString()
+      });
+      await fetchTasksTomorrow();
+    }
+    catch(error){
+      console.log('Could not delete a task. Please try again later.', error);
     }
   }
 
@@ -86,7 +98,7 @@ function HomePage(){
        <button className="add-button" onClick={addTodaysTask}>
         Add to today
        </button>
-       <button className="add-button">
+       <button className="add-button" onClick={addTomorrowsTask}>
         Add to tomorrow
        </button>
 
