@@ -18,7 +18,8 @@ function HomePage(){
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [addTask, setAddTask] = useState <string>('');
- 
+  const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
+
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
   } 
@@ -39,6 +40,23 @@ function HomePage(){
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks])
+
+  useEffect(() => {
+    const fetchTasksTomorrow = async(): Promise<void> => {
+     try{
+      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
+      setTasksTomorrow(response.data);
+      console.log(response);
+     } 
+     catch(error){
+      console.log("Could not load today's tasks. Please try again later", error);
+     }
+    } 
+
+    fetchTasksTomorrow();
+
+  }, [setTasksTomorrow]);
+ 
 
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAddTask(event.target.value);
@@ -114,7 +132,12 @@ function HomePage(){
 
         <div className="task-manager-card">
           <ul className="todo-list">
-            <TomorrowsTaskList />
+            {tasksTomorrow.map(task => {
+              return(
+                <TomorrowsTaskList task={task} key={task.id}/>
+              )
+            })
+            }
           </ul>
         </div>
 

@@ -1,16 +1,21 @@
 import './TomorrowsTaskList.css';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import type { Task } from './HomePage'; 
+import { useEffect } from 'react';
+import type { Task } from './HomePage';
 
-function TomorrowsTaskList(){
-  const [todaysTask, setTodaysTask] = useState<Task[]>([]);
+type TaskToday = {
+  task: Task,
+  //setTasksTomorrow: React.Dispatch<React.SetStateAction<Task[]>>
+}
+
+function TomorrowsTaskList({task}: TaskToday){
   
+  /*
   useEffect(() => {
-    const fetchTasksToday = async(): Promise<void> => {
+    const fetchTasksTomorrow = async(): Promise<void> => {
      try{
       const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
-      setTodaysTask(response.data);
+      setTasksTomorrow(response.data);
       console.log(response);
      } 
      catch(error){
@@ -18,15 +23,19 @@ function TomorrowsTaskList(){
      }
     } 
 
-    fetchTasksToday();
+    fetchTasksTomorrow();
 
-  }, []);
+  }, [setTasksTomorrow]);
+*/
 
   return(
     <>
-     <li>wash dishes</li>
+     <li>
+       {task.task}
+     </li>
     </>
   )
 }
 
 export default TomorrowsTaskList;
+
