@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import TodaysTaskList from './TodaysTaskList';
+import TomorrowsTaskList from './TomorrowsTaskList';
 
 export type Task = {
   createdAt: Date,
@@ -29,8 +30,6 @@ function HomePage(){
   const fetchTasks = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
-      console.log(response.data);
-
       setTasks(response.data);
     } catch(error){
       console.log('Cannot load the data. Please try again later.', error);
@@ -115,9 +114,7 @@ function HomePage(){
 
         <div className="task-manager-card">
           <ul className="todo-list">
-            <li>Wash dishes</li>
-            <li>Watch TV</li>
-            <li>Go outside</li>
+            <TomorrowsTaskList />
           </ul>
         </div>
 
