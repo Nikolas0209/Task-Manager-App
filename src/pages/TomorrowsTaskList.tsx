@@ -6,13 +6,26 @@ import axios from 'axios';
 type TaskToday = {
   task: Task,
   isOpen: boolean
-  //setTasksTomorrow: React.Dispatch<React.SetStateAction<Task[]>>,
-  toggleTaskDetails: () => void
+  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>,
+  toggleTaskDetails: () => void,
+  fetchTasksTomorrow: () => Promise<void>
 }
 
-function TomorrowsTaskList({ task, isOpen, toggleTaskDetails }: TaskToday){
+function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow }: TaskToday){
   
+  const deleteTaskTomorrow = async (): Promise<void>  => {
+   try{
+    const result = await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow/${task.id}`);
+    setTaskDetails(null);
+    console.log(result)
+   }
+   catch(error){
+    console.log('Could not delete the task. Please try again later.', error);
+   }
   
+    await fetchTasksTomorrow();
+
+  }
 
   return(
     <>
@@ -35,7 +48,7 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails }: TaskToday){
         Assigned on: {new Date(task.createdAt).toLocaleDateString()}
         <div className="delete-task-container">
           Delete Task:
-          <button className="delete-task-button" >
+          <button className="delete-task-button" onClick={deleteTaskTomorrow}>
             <img src={bin} className="bin-image"/>
           </button>
         </div>

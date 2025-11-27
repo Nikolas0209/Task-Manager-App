@@ -37,26 +37,21 @@ function HomePage(){
     }
   },[]);
    
-  useEffect(() => {
-    fetchTasks();
-  }, [fetchTasks])
-
-  useEffect(() => {
-    const fetchTasksTomorrow = async(): Promise<void> => {
-     try{
-      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
-      setTasksTomorrow(response.data);
-      console.log(response);
-     } 
-     catch(error){
-      console.log("Could not load today's tasks. Please try again later", error);
-     }
+  const fetchTasksTomorrow = useCallback(async(): Promise<void> => {
+    try{
+     const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
+     setTasksTomorrow(response.data);
+     console.log(response);
     } 
-
-    fetchTasksTomorrow();
-
+    catch(error){
+     console.log("Could not load today's tasks. Please try again later", error);
+    }
   }, []);
- 
+
+  useEffect(() => {
+   fetchTasks();
+   fetchTasksTomorrow();
+  }, [fetchTasks, fetchTasksTomorrow])
 
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAddTask(event.target.value);
@@ -128,11 +123,11 @@ function HomePage(){
                 setTaskDetails(prev => (prev === task.id ? null : task.id ));
                };
 
-              return (
-               <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
-                fetchTasks={fetchTasks} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails}/>
-              )
-             })
+               return (
+                <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
+                 fetchTasks={fetchTasks} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails}/>
+               )
+              })
             }
           </ul>
         </div>
@@ -146,11 +141,12 @@ function HomePage(){
                 setTaskDetails(prev => (prev === task.id ? null : task.id ));
                };
 
-              return(
+               return(
                 <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 
-                 toggleTaskDetails={toggleTaskDetails}/>
-              )
-            })
+                 toggleTaskDetails={toggleTaskDetails} fetchTasksTomorrow={fetchTasksTomorrow} 
+                 setTaskDetails={setTaskDetails}/>
+                )
+              })
             }
           </ul>
         </div>
