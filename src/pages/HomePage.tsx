@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import TodaysTaskList from './TodaysTaskList';
 import TomorrowsTaskList from './TomorrowsTaskList';
+import YesterdaysTaskList from './YesterdaysTaskList';
 
 export type Task = {
   createdAt: Date,
@@ -133,9 +134,17 @@ function HomePage(){
 
         <div className="task-manager-card">
           <ul className="todo-list">
-            <li>Wash dishes</li>
-            <li>Watch TV</li>
-            <li>Go outside</li>
+            {tasksYesterday.map(task => {
+              const isOpen = taskDetails === task.id;
+
+              const toggleTaskDetails = ():void => {
+                setTaskDetails(prev => (prev === task.id ? null : task.id));
+              }
+
+              return(
+               <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} tasksYesterday={tasksYesterday} task={task}/>
+              )
+            })}
           </ul>
         </div>
       
