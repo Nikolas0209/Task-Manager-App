@@ -142,7 +142,7 @@ function HomePage(){
               }
 
               return(
-               <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} tasksYesterday={tasksYesterday} task={task}/>
+               <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} tasksYesterday={tasksYesterday} task={task} fetchTasksYesterday={fetchTasksYesterday} setTaskDetails={setTaskDetails} />
               )
             })}
           </ul>
