@@ -29,13 +29,16 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
 
   return(
     <>
-        <li>
-    {task.task} 
+   <li>
     <div className="more-info-button-container">
-      <button className="more-info-button" onClick={toggleTaskDetails}>
+     <div className="task-text">{task.task}</div>
+      <div>
+        <button className="more-info-button" onClick={toggleTaskDetails}>
         ...
-      </button>
+        </button>
+      </div>
     </div>
+
     {isOpen && (
       <div className="task-details">
       <div className="task-state-container">

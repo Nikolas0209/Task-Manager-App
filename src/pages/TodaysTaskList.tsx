@@ -26,23 +26,29 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDe
 
  return(
    <li>
-    {task.task} 
     <div className="more-info-button-container">
-      <button className="more-info-button" onClick={toggleTaskDetails}>
-        ...
-      </button>
+      <div className="task-text">
+         <span className="dash-span"></span>
+         {task.task}
+      </div>
+      <div>
+       <button className="more-info-button" onClick={toggleTaskDetails}>
+         ...
+       </button>
+      </div>
     </div>
+
     {isOpen && (
       <div className="task-details">
-      <div className="task-state-container">
-        Select status:
-        <div>
-          <button className="finished-task">✅</button>
-          <button className="unfinished-task">❌</button>
-        </div>
-      </div>
+        <div className="task-state-container">
+          Select status:
+          <div>
+            <button className="finished-task">✅</button>
+            <button className="unfinished-task">❌</button>
+          </div>
+       </div>
         Assigned on: {new Date(task.createdAt).toLocaleDateString()}
-        <div className="delete-task-container">
+       <div className="delete-task-container">
           Delete Task:
           <button className="delete-task-button" onClick={deleteTask}>
             <img src={bin} className="bin-image"/>

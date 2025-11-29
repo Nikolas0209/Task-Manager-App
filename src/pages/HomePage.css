@@ -85,36 +85,45 @@ button:disabled:hover{
   background-color: green;
 }
 
+
+
+
 .task-manager-card{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   border-left: 1px solid black;
   border-right: 1px solid black;
 }
 
-.todo-list{
-  list-style: none;      
-  padding-left: 4px;
-  margin: 0;
-  text-align: left; 
+.todo-list{    
+  margin-left: 14px;
+  list-style-type: "-";     
+  padding: 0;
 }
 
 .todo-list li{
   padding: 5px;
   font-size: 18px;
-  display: flex;
-  justify-content: space-between;
 }
 
-.todo-list li::before {
-  content: "- ";    
-}
 
 .task-manager-date{
   border-bottom: 1px solid black;
   padding: 10px;
 }
+
+.task-text{
+  text-align: left;
+  flex: 1;
+ 
+}
+
+.dash-span{
+  display: inline-block;
+
+}
+
+
 
 .past-tasks-and-instructions-container{
  display: flex; 
@@ -178,5 +187,4 @@ button:disabled:hover{
   border: 2px solid royalblue;
   border-radius: 5px;
 }
-
 

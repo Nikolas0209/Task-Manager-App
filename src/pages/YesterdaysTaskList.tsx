@@ -16,20 +16,22 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
  }: TaskTomorrow) {
 
  const deleteTaskYesterday = async(): Promise<void> => {
-  const response = await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday/${task.id}`);
+  await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday/${task.id}`);
   setTaskDetails(null);
   await fetchTasksYesterday();
-  console.log(response)
  }
 
  return(
   <>       
     <li>
-    {task.task} 
     <div className="more-info-button-container">
-      <button className="more-info-button" onClick={toggleTaskDetails}>
+     <div className="task-text">{task.task}</div> 
+     <div>
+       <button className="more-info-button" onClick={toggleTaskDetails}>
         ...
-      </button>
+       </button>
+     </div>
+   
     </div>
     {isOpen && (
       <div className="task-details">

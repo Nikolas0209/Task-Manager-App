@@ -23,9 +23,9 @@
 
 .more-info-button-container{
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   padding-left: 2px;
+  justify-content: space-between;
 }
 
 .more-info-button{
