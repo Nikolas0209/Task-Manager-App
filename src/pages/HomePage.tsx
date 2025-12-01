@@ -16,7 +16,13 @@ export type Task = {
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([{
+    id: crypto.randomUUID(),
+    task: '',
+    createdAt: new Date,
+    isFinished: false
+  }]);
+
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [addTask, setAddTask] = useState <string>('');
   const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
@@ -33,7 +39,13 @@ function HomePage(){
   const fetchTasks = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
-      setTasks(response.data);
+     
+      const tasksWithUUID = response.data.map((task: Task) => ({
+        ...task,
+        id: crypto.randomUUID()
+      }))
+      setTasks(tasksWithUUID);
+
     } catch(error){
       console.log('Cannot load the data. Please try again later.', error);
     }
@@ -53,7 +65,6 @@ function HomePage(){
     try{
       const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday');
       setTasksYesterday(response.data);
-      console.log(response);
     }
     catch(error){
       console.log("Could not load yesterday's tasks. Please try again later.", error);
@@ -84,7 +95,7 @@ function HomePage(){
 
   const addTomorrowsTask = async(): Promise<void> => {
     try{
-      axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
+      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
         task: addTask,
         isFinished: false,
         createdAt: new Date().toISOString()
@@ -139,6 +150,7 @@ function HomePage(){
 
               const toggleTaskDetails = ():void => {
                 setTaskDetails(prev => (prev === task.id ? null : task.id));
+                console.log(task.id)
               }
 
               return(
@@ -155,6 +167,7 @@ function HomePage(){
 
                const toggleTaskDetails = (): void => {
                 setTaskDetails(prev => (prev === task.id ? null : task.id ));
+                console.log(task.id)
                };
 
                return (
@@ -173,7 +186,10 @@ function HomePage(){
 
                const toggleTaskDetails = (): void => {
                 setTaskDetails(prev => (prev === task.id ? null : task.id ));
+                console.log(task.id)
                };
+
+              
 
                return(
                 <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 
