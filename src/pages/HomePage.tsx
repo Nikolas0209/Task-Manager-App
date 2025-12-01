@@ -16,12 +16,7 @@ export type Task = {
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<Task[]>([{
-    id: crypto.randomUUID(),
-    task: '',
-    createdAt: new Date,
-    isFinished: false
-  }]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [addTask, setAddTask] = useState <string>('');
@@ -60,6 +55,7 @@ function HomePage(){
       id: crypto.randomUUID()
      }))
      setTasksTomorrow(tasksWithUUID);
+
     } 
     catch(error){
      console.log("Could not load today's tasks. Please try again later", error);
@@ -69,7 +65,13 @@ function HomePage(){
   const fetchTasksYesterday = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday');
-      setTasksYesterday(response.data);
+
+      const tasksWithUUID = response.data.map((task: Task) => ({
+        ...task,
+        id: crypto.randomUUID()
+      }))
+      setTasksYesterday(tasksWithUUID);
+
     }
     catch(error){
       console.log("Could not load yesterday's tasks. Please try again later.", error);
