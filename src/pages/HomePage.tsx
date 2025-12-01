@@ -11,13 +11,13 @@ export type Task = {
   task: string,
   isFinished?: boolean,
   id: string,
+  localId: string
 }
 
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [tasks, setTasks] = useState<Task[]>([]);
-
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [addTask, setAddTask] = useState <string>('');
   const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
@@ -31,30 +31,35 @@ function HomePage(){
     navigate('/task-history');
   }
 
+
+
   const fetchTasks = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
      
-      const tasksWithUUID = response.data.map((task: Task) => ({
+      const tasksWithLocalId = response.data.map((task: Task) => ({
         ...task,
-        id: crypto.randomUUID()
+        localId: crypto.randomUUID()
       }))
-      setTasks(tasksWithUUID);
+      setTasks(tasksWithLocalId);
 
     } catch(error){
       console.log('Cannot load the data. Please try again later.', error);
     }
   },[]);
+
+
+
    
   const fetchTasksTomorrow = useCallback(async(): Promise<void> => {
     try{
      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
 
-     const tasksWithUUID = response.data.map((task: Task) => ({
+     const tasksWithLocalId = response.data.map((task: Task) => ({
       ...task,
-      id: crypto.randomUUID()
+      localId: crypto.randomUUID()
      }))
-     setTasksTomorrow(tasksWithUUID);
+     setTasksTomorrow(tasksWithLocalId);
 
     } 
     catch(error){
@@ -62,21 +67,27 @@ function HomePage(){
     }
   }, []);
 
+
+
+
   const fetchTasksYesterday = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday');
 
-      const tasksWithUUID = response.data.map((task: Task) => ({
+      const tasksWithLocalId = response.data.map((task: Task) => ({
         ...task,
-        id: crypto.randomUUID()
+        localId: crypto.randomUUID()
       }))
-      setTasksYesterday(tasksWithUUID);
+      setTasksYesterday(tasksWithLocalId);
 
     }
     catch(error){
       console.log("Could not load yesterday's tasks. Please try again later.", error);
     }
   }, []);
+
+
+
 
   useEffect(() => {
    fetchTasks();
@@ -87,6 +98,8 @@ function HomePage(){
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAddTask(event.target.value);
   }
+
+
 
   const addTodaysTask = async(): Promise<void> => {
     try{
@@ -99,6 +112,8 @@ function HomePage(){
       console.log('Could not add a task. Please try again later.', error);
     }
   }
+
+
 
   const addTomorrowsTask = async(): Promise<void> => {
     try{
@@ -113,6 +128,8 @@ function HomePage(){
       console.log('Could not delete a task. Please try again later.', error);
     }
   }
+
+
 
   return(
     <>
@@ -153,10 +170,10 @@ function HomePage(){
         <div className="task-manager-card">
           <ul className="todo-list">
             {tasksYesterday.map(task => {
-              const isOpen = taskDetails === task.id;
+              const isOpen = taskDetails === task.localId;
 
               const toggleTaskDetails = ():void => {
-                setTaskDetails(prev => (prev === task.id ? null : task.id));
+                setTaskDetails(prev => (prev === task.localId ? null : task.localId));
                 console.log(task.id)
               }
 
@@ -170,10 +187,10 @@ function HomePage(){
         <div className="task-manager-card">
           <ul className="todo-list">
             {tasks.map(task => {
-               const isOpen = taskDetails === task.id;
+               const isOpen = taskDetails === task.localId;
 
                const toggleTaskDetails = (): void => {
-                setTaskDetails(prev => (prev === task.id ? null : task.id ));
+                setTaskDetails(prev => (prev === task.localId ? null : task.localId));
                 console.log(task.id)
                };
 
@@ -189,10 +206,10 @@ function HomePage(){
         <div className="task-manager-card">
           <ul className="todo-list">
             {tasksTomorrow.map(task => {
-               const isOpen = taskDetails === task.id;
+               const isOpen = taskDetails === task.localId;
 
                const toggleTaskDetails = (): void => {
-                setTaskDetails(prev => (prev === task.id ? null : task.id ));
+                setTaskDetails(prev => (prev === task.localId ? null : task.localId));
                 console.log(task.id)
                };
 
