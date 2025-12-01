@@ -54,7 +54,12 @@ function HomePage(){
   const fetchTasksTomorrow = useCallback(async(): Promise<void> => {
     try{
      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
-     setTasksTomorrow(response.data);
+
+     const tasksWithUUID = response.data.map((task: Task) => ({
+      ...task,
+      id: crypto.randomUUID()
+     }))
+     setTasksTomorrow(tasksWithUUID);
     } 
     catch(error){
      console.log("Could not load today's tasks. Please try again later", error);
