@@ -103,12 +103,15 @@ function HomePage(){
 
   const addTodaysTask = async(): Promise<void> => {
     try{
+      if(!addTask) return;
+
       await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks', {task: addTask,
-      isFinished: false,
-      createdAt: new Date().toISOString()
-     });
+        isFinished: false,
+        createdAt: new Date().toISOString()
+      });
       await fetchTasks();
-    } catch(error){
+    } 
+    catch(error){
       console.log('Could not add a task. Please try again later.', error);
     }
   }
@@ -117,6 +120,8 @@ function HomePage(){
 
   const addTomorrowsTask = async(): Promise<void> => {
     try{
+      if(!addTask) return;
+
       await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
         task: addTask,
         isFinished: false,
