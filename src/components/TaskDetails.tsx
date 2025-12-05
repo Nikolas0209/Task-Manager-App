@@ -4,7 +4,7 @@ import type { Task } from '../pages/HomePage';
 
 type TaskDetails = {
   task: Task,
-  onDelete: () => Promise<void>
+  onDelete: () => Promise<void> 
 }
 
 function TaskDetails({ task, onDelete }: TaskDetails){ 

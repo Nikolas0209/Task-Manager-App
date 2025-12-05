@@ -1,19 +1,24 @@
-.more-info-button-container{
-  display: flex;
-  width: 100%;
-  padding-left: 2px;
-  justify-content: space-between;
+.task-details{
+  position: absolute;
+  background-color: rgb(118, 118, 118);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 5px;
+  right: 270px;
+  font-size: 18px;
 }
 
-.more-info-button{
-  background-color: royalblue;
-  color: white;
-  font-weight: bold;
-  height: 25px;
-  width: 25px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.task-state-container{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.delete-task-container{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  align-items: flex-end;
 }
 
 .delete-task-button{

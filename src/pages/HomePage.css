@@ -112,11 +112,7 @@ button:disabled:hover{
   padding: 10px;
 }
 
-.task-text{
-  text-align: left;
-  flex: 1;
- 
-}
+
 
 .dash-span{
   display: inline-block;

@@ -25,7 +25,7 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
  
    }
 
-  return(
+  return( 
    <li>
     <div className="more-info-button-container">
      <div className="task-text">{task.task}</div>
