@@ -1,6 +1,6 @@
-import bin from '../assets/bin.png';
 import type { Task } from './HomePage';
 import axios from 'axios';
+import TaskDetails from '../components/TaskDetails';
 
 type TaskTomorrow = {
   isOpen: boolean,
@@ -21,39 +21,22 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
   await fetchTasksYesterday();
  }
 
- return(
-  <>       
-    <li>
-    <div className="more-info-button-container">
-     <div className="task-text">{task.task}</div> 
-     <div>
-       <button className="more-info-button" onClick={toggleTaskDetails}>
-        ...
-       </button>
+ return(      
+   <li>
+     <div className="more-info-button-container">
+       <div className="task-text">{task.task}</div> 
+       <div>
+         <button className="more-info-button" onClick={toggleTaskDetails}>
+         ...
+         </button>
+       </div>
+  
      </div>
-   
-    </div>
-    {isOpen && (
-      <div className="task-details">
-      <div className="task-state-container">
-        Select status:
-        <div>
-          <button className="finished-task">✅</button>
-          <button className="unfinished-task">❌</button>
-        </div>
-      </div>
-        Assigned on: {new Date(task.createdAt).toLocaleDateString()}
-        <div className="delete-task-container">
-          Delete Task:
-          <button className="delete-task-button" onClick={deleteTaskYesterday} >
-            <img src={bin} className="bin-image"/>
-          </button>
-        </div>
-      </div> 
+     {isOpen && (
+      <TaskDetails task={task} onDelete={deleteTaskYesterday} />
       )
-    }
-    </li>              
-  </>
+     }
+   </li>              
  )
 }
 

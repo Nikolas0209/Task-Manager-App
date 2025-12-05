@@ -1,7 +1,7 @@
 import './TodaysTaskList.css';
 import type { Task } from './HomePage';
 import axios from 'axios';
-import bin from '../assets/bin.png';
+import TaskDetails from '../components/TaskDetails';
 
 type TodaysTaskListProp = {
   task: Task,
@@ -39,22 +39,7 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDe
     </div>
 
     {isOpen && (
-      <div className="task-details">
-        <div className="task-state-container">
-          Select status:
-          <div>
-            <button className="finished-task">✅</button>
-            <button className="unfinished-task">❌</button>
-          </div>
-       </div>
-        Assigned on: {new Date(task.createdAt).toLocaleDateString()}
-       <div className="delete-task-container">
-          Delete Task:
-          <button className="delete-task-button" onClick={deleteTask}>
-            <img src={bin} className="bin-image"/>
-          </button>
-        </div>
-      </div> 
+      <TaskDetails task={task} onDelete={deleteTask}/>
       )
     }
    </li> 

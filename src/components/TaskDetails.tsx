@@ -4,10 +4,10 @@ import type { Task } from '../pages/HomePage';
 
 type TaskDetails = {
   task: Task,
-  onDelete: () => void
+  onDelete: () => Promise<void>
 }
 
-function TaskDetails({ task, onDelete}: TaskDetails){ 
+function TaskDetails({ task, onDelete }: TaskDetails){ 
 
  return(
    <div className="task-details">
