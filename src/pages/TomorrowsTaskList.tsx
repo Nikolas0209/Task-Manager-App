@@ -1,7 +1,7 @@
 import './TomorrowsTaskList.css';
 import type { Task } from './HomePage';
-import bin from '../assets/bin.png';
 import axios from 'axios';
+import TaskDetails from '../components/TaskDetails';
 
 type TaskToday = {
   task: Task,
@@ -12,22 +12,20 @@ type TaskToday = {
 }
 
 function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow }: TaskToday){
-  
   const deleteTaskTomorrow = async (): Promise<void>  => {
-   try{
-     await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow/${task.id}`);
-    setTaskDetails(null);
+    try{
+      await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow/${task.id}`);
+     setTaskDetails(null);
+    }
+    catch(error){
+     console.log('Could not delete the task. Please try again later.', error);
+    }
+   
+     await fetchTasksTomorrow();
+ 
    }
-   catch(error){
-    console.log('Could not delete the task. Please try again later.', error);
-   }
-  
-    await fetchTasksTomorrow();
-
-  }
 
   return(
-    <>
    <li>
     <div className="more-info-button-container">
      <div className="task-text">{task.task}</div>
@@ -39,26 +37,10 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
     </div>
 
     {isOpen && (
-      <div className="task-details">
-      <div className="task-state-container">
-        Select status:
-        <div>
-          <button className="finished-task">✅</button>
-          <button className="unfinished-task">❌</button>
-        </div>
-      </div>
-        Assigned on: {new Date(task.createdAt).toLocaleDateString()}
-        <div className="delete-task-container">
-          Delete Task:
-          <button className="delete-task-button" onClick={deleteTaskTomorrow}>
-            <img src={bin} className="bin-image"/>
-          </button>
-        </div>
-      </div> 
-      )
+      <TaskDetails task={task} onDelete={deleteTaskTomorrow} />
+     )
     }
    </li> 
-    </>
   )
 }
 
