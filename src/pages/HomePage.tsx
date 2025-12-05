@@ -6,6 +6,7 @@ import TodaysTaskList from './TodaysTaskList';
 import TomorrowsTaskList from './TomorrowsTaskList';
 import YesterdaysTaskList from './YesterdaysTaskList';
 import TaskManagerInstructions from '../components/TaskManagerInstructions';
+import TaskInput from '../components/TaskInput';
 
 export type Task = {
   createdAt: Date,
@@ -20,7 +21,6 @@ function HomePage(){
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
-  const [addTask, setAddTask] = useState <string>('');
   const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
   const [tasksYesterday, setTasksYesterday] = useState<Task[]>([]);
 
@@ -31,8 +31,6 @@ function HomePage(){
   const taskHistory = (): void => {
     navigate('/task-history');
   }
-
-
 
   const fetchTasks = useCallback(async(): Promise<void> => {
     try{
@@ -49,9 +47,6 @@ function HomePage(){
     }
   },[]);
 
-
-
-   
   const fetchTasksTomorrow = useCallback(async(): Promise<void> => {
     try{
      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
@@ -67,9 +62,6 @@ function HomePage(){
      console.log("Could not load today's tasks. Please try again later", error);
     }
   }, []);
-
-
-
 
   const fetchTasksYesterday = useCallback(async(): Promise<void> => {
     try{
@@ -87,59 +79,11 @@ function HomePage(){
     }
   }, []);
 
-
-
-
   useEffect(() => {
    fetchTasks();
    fetchTasksTomorrow();
    fetchTasksYesterday()
   }, [fetchTasks, fetchTasksTomorrow, fetchTasksYesterday])
-
-  const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setAddTask(event.target.value);
-  }
-
-
-
-  const addTodaysTask = async(): Promise<void> => {
-    try{
-      if(!addTask) return;
-
-      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks', {task: addTask,
-        isFinished: false,
-        createdAt: new Date().toISOString()
-      });
-      setAddTask('');
-      await fetchTasks();
-    } 
-    catch(error){
-      console.log('Could not add a task. Please try again later.', error);
-    }
-  }
-
-
-
-  const addTomorrowsTask = async(): Promise<void> => {
-    try{
-      if(!addTask) return;
-
-      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
-        task: addTask,
-        isFinished: false,
-        createdAt: new Date().toISOString()
-      });
-      setAddTask('');
-      await fetchTasksTomorrow();
-    }
-    catch(error){
-      console.log('Could not delete a task. Please try again later.', error);
-    }
-  }
-
-  const handleEscapeButton = (event: React.KeyboardEvent<HTMLInputElement>):void => {
-    if(event.key === 'Escape') setAddTask('');
-  }
 
   return(
     <>
@@ -150,19 +94,8 @@ function HomePage(){
        </h1>
      </div>
 
-     <div className="input-container">
-       <input type="text" className="search-input" 
-        name="newTask" onChange={typeInput} onKeyDown={handleEscapeButton} 
-        value={addTask}
-        placeholder="Add new task here"/>
-       <button className="add-button" onClick={addTodaysTask}>
-        Add to today
-       </button>
-       <button className="add-button" onClick={addTomorrowsTask}>
-        Add to tomorrow
-       </button>
-     </div>
-     
+     <TaskInput fetchTasks={fetchTasks} fetchTasksTomorrow={fetchTasksTomorrow} />
+
      <div className="task-manager-summary-container">
       <div className="task-manager-header">
          <p>TASK MANAGER SUMMARY</p>
