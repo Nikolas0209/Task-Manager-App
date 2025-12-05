@@ -5,6 +5,7 @@ import axios from 'axios';
 import TodaysTaskList from './TodaysTaskList';
 import TomorrowsTaskList from './TomorrowsTaskList';
 import YesterdaysTaskList from './YesterdaysTaskList';
+import TaskManagerInstructions from '../components/TaskManagerInstructions';
 
 export type Task = {
   createdAt: Date,
@@ -246,19 +247,9 @@ function HomePage(){
       </div>
      </div>
 
-        {isInstructions &&
-         <div className="instructions-section">
-          <div className="instructions-go-back-button-wrapper">
-           <button className="instructions-go-back-button" 
-             onClick={toggleInstructions}>
-             Go Back
-           </button>
-          </div>
-          <div className="instructions-on">
-            Welcome to instructions
-          </div>
-         </div>
-        }
+      {isInstructions &&
+       <TaskManagerInstructions toggleInstructions={toggleInstructions}/>
+      }
     </>
   )
 };
