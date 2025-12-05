@@ -22,7 +22,6 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
     }
    
      await fetchTasksTomorrow();
- 
    }
 
   return( 

@@ -17,10 +17,16 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
  }: TaskTomorrow) {
 
  const deleteTaskYesterday = async(): Promise<void> => {
-  await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday/${task.id}`);
-  setTaskDetails(null);
+  try{
+   await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday/${task.id}`);
+   setTaskDetails(null);
+  } 
+  catch(error){
+    console.log('Could not delete the task. Please try again later.', error);
+  }
+
   await fetchTasksYesterday();
- }
+ };
 
  return(      
    <li>
