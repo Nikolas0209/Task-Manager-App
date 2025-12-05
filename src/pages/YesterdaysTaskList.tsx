@@ -1,6 +1,7 @@
 import type { Task } from './HomePage';
 import axios from 'axios';
 import TaskDetails from '../components/TaskDetails';
+import './TaskList.css';
 
 type TaskTomorrow = {
   isOpen: boolean,

@@ -1,4 +1,4 @@
-import './TodaysTaskList.css';
+import './TaskList.css';
 import type { Task } from './HomePage';
 import axios from 'axios';
 import TaskDetails from '../components/TaskDetails';
