@@ -109,6 +109,7 @@ function HomePage(){
         isFinished: false,
         createdAt: new Date().toISOString()
       });
+      setAddTask('');
       await fetchTasks();
     } 
     catch(error){
@@ -127,6 +128,7 @@ function HomePage(){
         isFinished: false,
         createdAt: new Date().toISOString()
       });
+      setAddTask('');
       await fetchTasksTomorrow();
     }
     catch(error){
@@ -134,7 +136,9 @@ function HomePage(){
     }
   }
 
-
+  const handleEscapeButton = (event: React.KeyboardEvent<HTMLInputElement>):void => {
+    if(event.key === 'Escape') setAddTask('');
+  }
 
   return(
     <>
@@ -147,7 +151,8 @@ function HomePage(){
 
      <div className="input-container">
        <input type="text" className="search-input" 
-        name="newTask" onChange={typeInput}
+        name="newTask" onChange={typeInput} onKeyDown={handleEscapeButton} 
+        value={addTask}
         placeholder="Add new task here"/>
        <button className="add-button" onClick={addTodaysTask}>
         Add to today
@@ -179,7 +184,6 @@ function HomePage(){
 
               const toggleTaskDetails = ():void => {
                 setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-                console.log(task.id)
               }
 
               return(
@@ -196,7 +200,6 @@ function HomePage(){
 
                const toggleTaskDetails = (): void => {
                 setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-                console.log(task.id)
                };
 
                return (
@@ -215,10 +218,7 @@ function HomePage(){
 
                const toggleTaskDetails = (): void => {
                 setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-                console.log(task.id)
                };
-
-              
 
                return(
                 <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 

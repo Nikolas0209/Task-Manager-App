@@ -15,9 +15,8 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
   
   const deleteTaskTomorrow = async (): Promise<void>  => {
    try{
-    const result = await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow/${task.id}`);
+     await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow/${task.id}`);
     setTaskDetails(null);
-    console.log(result)
    }
    catch(error){
     console.log('Could not delete the task. Please try again later.', error);
