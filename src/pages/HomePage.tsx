@@ -161,8 +161,8 @@ function HomePage(){
        <button className="add-button" onClick={addTomorrowsTask}>
         Add to tomorrow
        </button>
-
      </div>
+     
      <div className="task-manager-summary-container">
       <div className="task-manager-header">
          <p>TASK MANAGER SUMMARY</p>

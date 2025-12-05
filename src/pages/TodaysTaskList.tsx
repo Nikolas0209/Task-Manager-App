@@ -27,10 +27,7 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDe
  return(
    <li>
     <div className="more-info-button-container">
-      <div className="task-text">
-         <span className="dash-span"></span>
-         {task.task}
-      </div>
+      <div className="task-text">{task.task}</div>
       <div>
        <button className="more-info-button" onClick={toggleTaskDetails}>
          ...
