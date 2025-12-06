@@ -7,6 +7,7 @@ import TomorrowsTaskList from './TomorrowsTaskList';
 import YesterdaysTaskList from './YesterdaysTaskList';
 import TaskManagerInstructions from '../components/TaskManagerInstructions';
 import TaskInput from '../components/TaskInput';
+import NoTasksAssigned from '../components/NoTasksAssigned';
 
 export type Task = {
   createdAt: Date,
@@ -112,42 +113,49 @@ function HomePage(){
         </div>
 
         <div className="task-manager-card">
-          <ul className="todo-list">
-            {tasksYesterday.map(task => {
-              const isOpen = taskDetails === task.localId;
+          {tasksYesterday.length === 0 ? <NoTasksAssigned /> : ( 
+            <ul className="todo-list">
+              {tasksYesterday.map(task => {
+                const isOpen = taskDetails === task.localId;
 
-              const toggleTaskDetails = ():void => {
-                setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-              }
+                const toggleTaskDetails = ():void => {
+                  setTaskDetails(prev => (prev === task.localId ? null : task.localId));
+                }
 
-              return(
-               <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} tasksYesterday={tasksYesterday} task={task} fetchTasksYesterday={fetchTasksYesterday} setTaskDetails={setTaskDetails} />
-              )
-            })}
-          </ul>
+               return(
+                <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} tasksYesterday={tasksYesterday} task={task} fetchTasksYesterday={fetchTasksYesterday} setTaskDetails={setTaskDetails} />
+               )
+              })}
+            </ul>
+           )
+          }
         </div>
       
         <div className="task-manager-card">
-          <ul className="todo-list">
-            {tasks.map(task => {
-               const isOpen = taskDetails === task.localId;
+          {tasks.length === 0 ? <NoTasksAssigned /> : (
+            <ul className="todo-list">
+              {tasks.map(task => {
+                 const isOpen = taskDetails === task.localId;
 
-               const toggleTaskDetails = (): void => {
-                setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-               };
+                 const toggleTaskDetails = (): void => {
+                   setTaskDetails(prev => (prev === task.localId ? null : task.localId));
+                 };
 
-               return (
-                <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
-                 fetchTasks={fetchTasks} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails}/>
-               )
-              })
-            }
-          </ul>
+                 return (
+                  <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
+                  fetchTasks={fetchTasks} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails}/>
+                 )
+               })
+              }
+            </ul>
+            )
+          }
         </div>
 
         <div className="task-manager-card">
-          <ul className="todo-list">
-            {tasksTomorrow.map(task => {
+          {tasksTomorrow.length === 0 ? <NoTasksAssigned /> : (
+            <ul className="todo-list">
+             {tasksTomorrow.map(task => {
                const isOpen = taskDetails === task.localId;
 
                const toggleTaskDetails = (): void => {
@@ -159,9 +167,11 @@ function HomePage(){
                  toggleTaskDetails={toggleTaskDetails} fetchTasksTomorrow={fetchTasksTomorrow} 
                  setTaskDetails={setTaskDetails}/>
                 )
-              })
-            }
-          </ul>
+               })
+              }
+            </ul> 
+           )
+          }
         </div>
 
       </div>

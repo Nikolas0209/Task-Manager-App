@@ -1,0 +1,10 @@
+.no-task-assigned-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-task-assigned-text{
+  font-size: 20px;
+  color: rgb(161, 159, 159);
+}
