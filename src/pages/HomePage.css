@@ -80,6 +80,7 @@ button:disabled:hover{
   margin-left: 14px;
   list-style-type: "-";     
   padding: 0;
+  position: relative;
 }
 
 .todo-list li{

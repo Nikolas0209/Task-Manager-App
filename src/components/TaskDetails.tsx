@@ -10,7 +10,7 @@ type TaskDetails = {
 function TaskDetails({ task, onDelete }: TaskDetails){ 
 
  return(
-   <div className="task-details">
+   <div className="task-details task-details-tomorrow">
      <div className="task-state-container">
        Select status:
        <div>

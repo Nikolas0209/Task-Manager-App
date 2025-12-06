@@ -1,11 +1,12 @@
 .task-details{
-  position: absolute;
   background-color: rgb(118, 118, 118);
   color: white;
   padding: 10px 12px;
   border-radius: 5px;
-  right: 270px;
   font-size: 18px;
+  position: absolute;
+  z-index: 2;
+  right: 30px;
 }
 
 .task-state-container{

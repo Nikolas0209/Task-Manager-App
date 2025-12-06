@@ -13,8 +13,7 @@ type TaskTomorrow = {
 }
 
 function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterday,
-  setTaskDetails
- }: TaskTomorrow) {
+ setTaskDetails}: TaskTomorrow) {
 
  const deleteTaskYesterday = async(): Promise<void> => {
   try{
