@@ -1,7 +1,10 @@
 import './TaskDetails.css';
 import bin from '../assets/bin.png';
 import type { Task } from '../pages/HomePage';
-
+import undo from '../assets/undo.png';
+import checkedTask from '../assets/check.png';
+import uncheckedTask from '../assets/close.png';
+ 
 type TaskDetails = {
   task: Task,
   onDelete: () => Promise<void> 
@@ -14,8 +17,15 @@ function TaskDetails({ task, onDelete }: TaskDetails){
      <div className="task-state-container">
        Select status:
        <div>
-         <button className="finished-task">✅</button>
-         <button className="unfinished-task">❌</button>
+         <button className="status-update-button">
+           <img className="status-button-image" src={undo} />
+         </button>
+         <button className="status-update-button">
+           <img className="status-button-image" src={checkedTask} />
+         </button>
+         <button className="status-update-button">
+           <img className="status-button-image" src={uncheckedTask} />
+         </button>
        </div>
      </div>
        Assigned on: {new Date(task.createdAt).toLocaleDateString()}
