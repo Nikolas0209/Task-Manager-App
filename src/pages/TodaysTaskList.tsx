@@ -4,14 +4,18 @@ import axios from 'axios';
 import TaskDetails from '../components/TaskDetails';
 
 type TodaysTaskListProp = {
-  task: Task,
-  setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>,
-  fetchTasks: () => Promise<void>,
-  isOpen: boolean,
-  toggleTaskDetails: () => void
+  task: Task;
+  setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
+  fetchTasks: () => Promise<void>;
+  isOpen: boolean;
+  toggleTaskDetails: () => void;
+  markTask: (status: string) => void;
+  markedTask: (status: string) => void;
+  unmarkedTask: (status: string) => void;
+  status: string;
 };
 
-function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDetails }: TodaysTaskListProp){
+function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status }: TodaysTaskListProp){
 
   const deleteTask = async(): Promise<void> => {
     try{
@@ -27,7 +31,15 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDe
  return(
    <li>
     <div className="more-info-button-container">
-      <div className="task-text">{task.task}</div>
+      <div className={"task-text " +
+        (status === "marked"
+          ? "marked-task"
+          : status === "unmarked"
+          ? "unmarked-task"
+          : "not-marked-task"
+        )}>
+          {task.task}
+      </div>
       <div>
        <button className="more-info-button" onClick={toggleTaskDetails}>
          ...
@@ -36,7 +48,7 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDe
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTask}/>
+      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} unmarkedTask={unmarkedTask} markedTask={markedTask} />
       )
     }
    </li> 

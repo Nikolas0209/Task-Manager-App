@@ -7,23 +7,26 @@ import uncheckedTask from '../assets/close.png';
  
 type TaskDetails = {
   task: Task,
-  onDelete: () => Promise<void> 
+  onDelete: () => Promise<void>
+  markTask: (status: string) => void
+  markedTask: (status: string) => void
+  unmarkedTask: (status: string) => void 
 }
 
-function TaskDetails({ task, onDelete }: TaskDetails){ 
-
+function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask }: TaskDetails){ 
+ 
  return(
    <div className="task-details task-details-tomorrow">
      <div className="task-state-container">
        Select status:
        <div>
-         <button className="status-update-button">
+         <button className="status-update-button" onClick={() => markTask(task.localId)}>
            <img className="status-button-image" src={undo} />
          </button>
-         <button className="status-update-button">
+         <button className="status-update-button" onClick={() => markedTask(task.localId)}>
            <img className="status-button-image" src={checkedTask} />
          </button>
-         <button className="status-update-button">
+         <button className="status-update-button" onClick={() => unmarkedTask(task.localId)}>
            <img className="status-button-image" src={uncheckedTask} />
          </button>
        </div>

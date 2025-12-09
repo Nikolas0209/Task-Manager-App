@@ -10,6 +10,18 @@
   flex: 1;
 }
 
+.marked-task{
+  color: green
+}
+
+.unmarked-task{
+  color: red
+}
+
+.not-marked-task{
+  color: black
+}
+
 .more-info-button{
   background-color: royalblue;
   color: white;

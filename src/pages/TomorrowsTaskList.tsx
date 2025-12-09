@@ -9,9 +9,15 @@ type TaskToday = {
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>,
   toggleTaskDetails: () => void,
   fetchTasksTomorrow: () => Promise<void>
+  markTask: (status: string) => void
+  markedTask: (status: string) => void
+  unmarkedTask: (status: string) => void
+  status: string 
 }
 
-function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow }: TaskToday){
+function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow, 
+   markTask, markedTask, unmarkedTask, status }: TaskToday){
+
   const deleteTaskTomorrow = async (): Promise<void>  => {
     try{
       await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow/${task.id}`);
@@ -27,7 +33,13 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
   return( 
    <li>
     <div className="more-info-button-container">
-     <div className="task-text">{task.task}</div>
+     <div className={
+        "task-text " +
+         (status === "marked"
+          ? "marked-task"
+          : status === "unmarked"
+          ? "unmarked-task"
+          : "not-marked-task")}>{task.task}</div>
       <div>
         <button className="more-info-button" onClick={toggleTaskDetails}>
         ...
@@ -36,7 +48,7 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTaskTomorrow} />
+      <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask} />
      )
     }
    </li> 
