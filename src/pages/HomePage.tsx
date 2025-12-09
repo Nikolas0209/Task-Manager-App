@@ -10,11 +10,11 @@ import TaskInput from '../components/TaskInput';
 import NoTasksAssigned from '../components/NoTasksAssigned';
 
 export type Task = {
-  createdAt: Date,
-  task: string,
-  isFinished?: boolean,
-  id: string,
-  localId: string
+  createdAt: Date;
+  task: string;
+  isFinished: boolean;
+  id: string;
+  localId: string;
 }
 
 function HomePage(){
@@ -135,7 +135,7 @@ function HomePage(){
                   setTaskDetails(prev => (prev === task.localId ? null : task.localId));
                 }
 
-                const status = taskStatus[task.localId] || "not marked";
+                const status = taskStatus[task.localId] || 'not marked';
                 
                return(
                  <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
@@ -159,7 +159,7 @@ function HomePage(){
                    setTaskDetails(prev => (prev === task.localId ? null : task.localId));
                  };
 
-                 const status = taskStatus[task.localId] || "not marked";
+                 const status = taskStatus[task.localId] || 'not marked';
 
                  return (
                   <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
@@ -184,7 +184,7 @@ function HomePage(){
                 setTaskDetails(prev => (prev === task.localId ? null : task.localId));
                };
 
-               const status = taskStatus[task.localId] || "not marked";
+               const status = taskStatus[task.localId] || 'not marked';
 
                return(
                 <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 

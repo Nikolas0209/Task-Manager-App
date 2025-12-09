@@ -3,20 +3,20 @@ import type { Task } from './HomePage';
 import axios from 'axios';
 import TaskDetails from '../components/TaskDetails';
 
-type TaskToday = {
-  task: Task,
-  isOpen: boolean
-  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>,
-  toggleTaskDetails: () => void,
-  fetchTasksTomorrow: () => Promise<void>
-  markTask: (status: string) => void
-  markedTask: (status: string) => void
-  unmarkedTask: (status: string) => void
-  status: string 
+type TaskTomorrow = {
+  task: Task;
+  isOpen: boolean;
+  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
+  toggleTaskDetails: () => void;
+  fetchTasksTomorrow: () => Promise<void>;
+  markTask: (status: string) => void;
+  markedTask: (status: string) => void;
+  unmarkedTask: (status: string) => void;
+  status: string;
 }
 
 function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow, 
-   markTask, markedTask, unmarkedTask, status }: TaskToday){
+   markTask, markedTask, unmarkedTask, status }: TaskTomorrow){
 
   const deleteTaskTomorrow = async (): Promise<void>  => {
     try{
@@ -36,10 +36,13 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
      <div className={
         "task-text " +
          (status === "marked"
-          ? "marked-task"
-          : status === "unmarked"
-          ? "unmarked-task"
-          : "not-marked-task")}>{task.task}</div>
+           ? "marked-task"
+           : status === "unmarked"
+           ? "unmarked-task"
+           : "not-marked-task"
+          )}>
+           {task.task}
+      </div>
       <div>
         <button className="more-info-button" onClick={toggleTaskDetails}>
         ...
@@ -48,7 +51,8 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask} />
+      <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} markedTask={markedTask} 
+       unmarkedTask={unmarkedTask} />
      )
     }
    </li> 

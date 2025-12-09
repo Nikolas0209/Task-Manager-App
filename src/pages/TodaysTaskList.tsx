@@ -3,7 +3,7 @@ import type { Task } from './HomePage';
 import axios from 'axios';
 import TaskDetails from '../components/TaskDetails';
 
-type TodaysTaskListProp = {
+type TaskToday = {
   task: Task;
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
   fetchTasks: () => Promise<void>;
@@ -15,7 +15,7 @@ type TodaysTaskListProp = {
   status: string;
 };
 
-function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status }: TodaysTaskListProp){
+function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskToday){
 
   const deleteTask = async(): Promise<void> => {
     try{

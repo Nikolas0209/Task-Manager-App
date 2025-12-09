@@ -6,11 +6,11 @@ import checkedTask from '../assets/check.png';
 import uncheckedTask from '../assets/close.png';
  
 type TaskDetails = {
-  task: Task,
-  onDelete: () => Promise<void>
-  markTask: (status: string) => void
-  markedTask: (status: string) => void
-  unmarkedTask: (status: string) => void 
+  task: Task;
+  onDelete: () => Promise<void>;
+  markTask: (status: string) => void;
+  markedTask: (status: string) => void;
+  unmarkedTask: (status: string) => void;
 }
 
 function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask }: TaskDetails){ 

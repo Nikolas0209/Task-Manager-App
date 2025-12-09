@@ -3,21 +3,21 @@ import axios from 'axios';
 import TaskDetails from '../components/TaskDetails';
 import './TaskList.css';
 
-type TaskTomorrow = {
-  isOpen: boolean,
-  toggleTaskDetails: () => void,
-  tasksYesterday: Task[],
-  task: Task,
-  fetchTasksYesterday: () => Promise<void>,
-  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>
-  markTask: (status: string) => void
-  markedTask: (status: string) => void 
-  unmarkedTask: (status: string) => void
-  status: string 
+type TaskYesterday = {
+  isOpen: boolean;
+  toggleTaskDetails: () => void;
+  tasksYesterday: Task[];
+  task: Task;
+  fetchTasksYesterday: () => Promise<void>;
+  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
+  markTask: (status: string) => void;
+  markedTask: (status: string) => void;
+  unmarkedTask: (status: string) => void;
+  status: string;
 }
 
 function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterday,
- setTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskTomorrow) {
+ setTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskYesterday) {
 
  const deleteTaskYesterday = async(): Promise<void> => {
   try{
@@ -34,14 +34,15 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
  return(      
    <li>
      <div className="more-info-button-container">
-       <div className={
-        "task-text " +
+       <div className={"task-text " +
          (status === "marked"
-          ? "marked-task"
-          : status === "unmarked"
-          ? "unmarked-task"
-          : "not-marked-task")}>
-            {task.task}</div> 
+           ? "marked-task"
+           : status === "unmarked"
+           ? "unmarked-task"
+           : "not-marked-task"
+          )}>
+           {task.task}
+        </div> 
        <div>
          <button className="more-info-button" onClick={toggleTaskDetails}>
          ...
@@ -50,7 +51,8 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
   
      </div>
      {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTaskYesterday} markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask}/>
+      <TaskDetails task={task} onDelete={deleteTaskYesterday} markTask={markTask} markedTask={markedTask}
+       unmarkedTask={unmarkedTask} />
       )
      }
    </li>              
