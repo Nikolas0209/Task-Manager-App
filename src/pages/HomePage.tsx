@@ -20,7 +20,7 @@ export type Task = {
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasksToday, setTasksToday] = useState<Task[]>([]);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
   const [tasksYesterday, setTasksYesterday] = useState<Task[]>([]);
@@ -42,7 +42,7 @@ function HomePage(){
         ...task,
         localId: crypto.randomUUID()
       }))
-      setTasks(tasksWithLocalId);
+      setTasksToday(tasksWithLocalId);
 
     } catch(error){
       console.log('Cannot load the data. Please try again later.', error);
@@ -150,9 +150,9 @@ function HomePage(){
         </div>
       
         <div className="task-manager-card">
-          {tasks.length === 0 ? <NoTasksAssigned /> : (
+          {tasksToday.length === 0 ? <NoTasksAssigned /> : (
             <ul className="todo-list">
-              {tasks.map(task => {
+              {tasksToday.map(task => {
                  const isOpen = taskDetails === task.localId;
 
                  const toggleTaskDetails = (): void => {
