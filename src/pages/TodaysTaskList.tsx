@@ -30,7 +30,7 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasksToday, isOpen, toggleT
 
  return(
    <li>
-    <div className="more-info-button-container">
+    <div className="more-info-container">
       <div className={"task-text " +
         (status === "marked"
           ? "marked-task"

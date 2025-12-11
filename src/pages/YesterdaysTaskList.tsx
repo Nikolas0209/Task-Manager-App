@@ -33,7 +33,7 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
 
  return(      
    <li>
-     <div className="more-info-button-container">
+     <div className="more-info-container">
        <div className={"task-text " +
          (status === "marked"
            ? "marked-task"
