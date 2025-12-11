@@ -34,7 +34,7 @@ function HomePage(){
     navigate('/task-history');
   }
 
-  const fetchTasks = useCallback(async(): Promise<void> => {
+  const fetchTasksToday = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
      
@@ -82,10 +82,10 @@ function HomePage(){
   }, []);
 
   useEffect(() => {
-   fetchTasks();
+   fetchTasksToday();
    fetchTasksTomorrow();
    fetchTasksYesterday()
-  }, [fetchTasks, fetchTasksTomorrow, fetchTasksYesterday])
+  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksYesterday])
 
   const markTask = (id: string):void => {
     setTaskStatus(prev => ({ ...prev, [id]: 'not marked' }));
@@ -108,7 +108,7 @@ function HomePage(){
        </h1>
      </div>
 
-     <TaskInput fetchTasks={fetchTasks} fetchTasksTomorrow={fetchTasksTomorrow} />
+     <TaskInput fetchTasksToday={fetchTasksToday} fetchTasksTomorrow={fetchTasksTomorrow} />
 
      <div className="task-manager-summary-container">
       <div className="task-manager-header">
@@ -163,7 +163,7 @@ function HomePage(){
 
                  return (
                   <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
-                    fetchTasks={fetchTasks} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
+                    fetchTasksToday={fetchTasksToday} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
                     markTask={markTask} markedTask={markedTask}
                     unmarkedTask={unmarkedTask} status={status} />
                  )

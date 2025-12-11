@@ -3,11 +3,11 @@ import { useState } from 'react';
 import axios from 'axios';
 
 type InputSection = {
-  fetchTasks: () => Promise<void>
+  fetchTasksToday: () => Promise<void>
   fetchTasksTomorrow: () => Promise<void>
 } 
 
-function TaskInput({ fetchTasks, fetchTasksTomorrow }: InputSection ){
+function TaskInput({ fetchTasksToday, fetchTasksTomorrow }: InputSection ){
   const [addTask, setAddTask] = useState <string>('');
 
   const addTodaysTask = async(): Promise<void> => {
@@ -19,7 +19,7 @@ function TaskInput({ fetchTasks, fetchTasksTomorrow }: InputSection ){
         createdAt: new Date().toISOString()
       });
       setAddTask('');
-      await fetchTasks();
+      await fetchTasksToday();
     } 
     catch(error){
       console.log('Could not add a task. Please try again later.', error);

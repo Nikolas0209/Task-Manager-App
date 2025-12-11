@@ -6,7 +6,7 @@ import TaskDetails from '../components/TaskDetails';
 type TaskToday = {
   task: Task;
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
-  fetchTasks: () => Promise<void>;
+  fetchTasksToday: () => Promise<void>;
   isOpen: boolean;
   toggleTaskDetails: () => void;
   markTask: (status: string) => void;
@@ -15,7 +15,7 @@ type TaskToday = {
   status: string;
 };
 
-function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskToday){
+function TodaysTaskList({ task, setTaskDetails, fetchTasksToday, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskToday){
 
   const deleteTask = async(): Promise<void> => {
     try{
@@ -25,7 +25,7 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasks, isOpen, toggleTaskDe
       console.log('Could not delete the task. Please try again later.', error);
     }
 
-    await fetchTasks();
+    await fetchTasksToday();
   };
 
  return(
