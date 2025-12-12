@@ -2,12 +2,11 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import TomorrowsTaskList from './TomorrowsTaskList';
 import TaskManagerInstructions from '../components/TaskManagerInstructions';
 import TaskInput from '../components/TaskInput';
-import NoTasksAssigned from '../components/NoTasksAssigned';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
-import YesterdaysTaskList from '../components/TaskList/YesterdaysTaskSection/YesterdaysTaskSection';
+import YesterdaysTaskSection from '../components/TaskList/YesterdaysTaskSection/YesterdaysTaskSection';
+import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 
 export type TaskStatusType = 'marked' | 'unmarked' | 'not marked';
 
@@ -128,7 +127,7 @@ function HomePage(){
         </div>
 
         <div className="task-manager-card">
-          <YesterdaysTaskList taskDetails={taskDetails} taskStatus={taskStatus} 
+          <YesterdaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksYesterday={tasksYesterday} 
              fetchTasksYesterday={fetchTasksYesterday} />
@@ -137,33 +136,15 @@ function HomePage(){
         <div className="task-manager-card">
            <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
-             unmarkedTask={unmarkedTask} tasksToday={tasksToday} fetchTasksToday={fetchTasksToday} />
+             unmarkedTask={unmarkedTask} tasksToday={tasksToday} 
+             fetchTasksToday={fetchTasksToday} />
         </div>
 
         <div className="task-manager-card">
-        {tasksTomorrow.length === 0 ? <NoTasksAssigned /> : (
-            <ul className="todo-list">
-             {tasksTomorrow.map(task => {
-               const isOpen = taskDetails === task.localId;
-
-               const toggleTaskDetails = (): void => {
-                setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-               };
-
-               const status = taskStatus[task.localId] || 'not marked';
-
-               return(
-                <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 
-                 toggleTaskDetails={toggleTaskDetails} fetchTasksTomorrow={fetchTasksTomorrow} 
-                 setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask}
-                 unmarkedTask={unmarkedTask}  status={status} />
-                )
-               })
-              }
-            </ul> 
-           )
-          }
-
+          <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
+             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
+             unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 
+             fetchTasksTomorrow={fetchTasksTomorrow} />
         </div>
 
       </div>
