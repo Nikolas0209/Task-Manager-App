@@ -1,7 +1,7 @@
-import './TaskList.css';
-import type { Task } from './HomePage';
+import '../TaskList.css';
+import type { Task } from '../../../pages/HomePage';
 import axios from 'axios';
-import TaskDetails from '../components/TaskDetails';
+import TaskDetails from '../../TaskDetails';
 
 type TaskToday = {
   task: Task;
