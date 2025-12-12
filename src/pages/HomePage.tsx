@@ -2,13 +2,12 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-//import TodaysTaskList from '../components/TaskList/TodaysTaskSection/TodaysTaskList';
 import TomorrowsTaskList from './TomorrowsTaskList';
-import YesterdaysTaskList from './YesterdaysTaskList';
 import TaskManagerInstructions from '../components/TaskManagerInstructions';
 import TaskInput from '../components/TaskInput';
 import NoTasksAssigned from '../components/NoTasksAssigned';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
+import YesterdaysTaskList from '../components/TaskList/YesterdaysTaskSection/YesterdaysTaskSection';
 
 export type TaskStatusType = 'marked' | 'unmarked' | 'not marked';
 
@@ -129,27 +128,10 @@ function HomePage(){
         </div>
 
         <div className="task-manager-card">
-          {tasksYesterday.length === 0 ? <NoTasksAssigned /> : ( 
-            <ul className="todo-list">
-              {tasksYesterday.map(task => {
-                const isOpen = taskDetails === task.localId;
-
-                const toggleTaskDetails = ():void => {
-                  setTaskDetails(prev => (prev === task.localId ? null : task.localId));
-                }
-
-                const status = taskStatus[task.localId] || 'not marked';
-                
-               return(
-                 <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-                   tasksYesterday={tasksYesterday} task={task} fetchTasksYesterday={fetchTasksYesterday} 
-                   setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask}
-                   unmarkedTask={unmarkedTask} status={status} />
-                )
-              })}
-            </ul>
-           )
-          }
+          <YesterdaysTaskList taskDetails={taskDetails} taskStatus={taskStatus} 
+             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
+             unmarkedTask={unmarkedTask} tasksYesterday={tasksYesterday} 
+             fetchTasksYesterday={fetchTasksYesterday} />
         </div>
       
         <div className="task-manager-card">
