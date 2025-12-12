@@ -1,5 +1,5 @@
 import NoTasksAssigned from "../../NoTasksAssigned";
-import YesterdaysTaskList from "../../../pages/YesterdaysTaskList";
+import YesterdaysTaskList from "./YesterdaysTaskList";
 import type { Task, TaskStatusType } from "../../../pages/HomePage";
 
 type YesterdaysTaskSections = {
