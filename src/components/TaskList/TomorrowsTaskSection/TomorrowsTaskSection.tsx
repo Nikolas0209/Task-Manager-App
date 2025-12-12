@@ -1,5 +1,5 @@
 import NoTasksAssigned from "../../NoTasksAssigned";
-import TomorrowsTaskList from "../../../pages/TomorrowsTaskList";
+import TomorrowsTaskList from "./TomorrowsTaskList";
 import type {Task, TaskStatusType } from '../../../pages/HomePage';
 
 type TodaysTaskSections = {
