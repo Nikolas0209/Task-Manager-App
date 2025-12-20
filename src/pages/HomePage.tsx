@@ -5,8 +5,8 @@ import axios from 'axios';
 import TaskManagerInstructions from '../components/TaskManagerInstructions';
 import TaskInput from '../components/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
-import YesterdaysTaskSection from '../components/TaskList/YesterdaysTaskSection/YesterdaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
+import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
 
 export type TaskStatusType = 'marked' | 'unmarked' | 'not marked';
 
@@ -24,7 +24,7 @@ function HomePage(){
   const [tasksToday, setTasksToday] = useState<Task[]>([]);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
-  const [tasksYesterday, setTasksYesterday] = useState<Task[]>([]);
+  const [tasksInTwoDays, setTasksInTwoDays] = useState<Task[]>([]);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
 
   const toggleInstructions = (): void => {
@@ -50,6 +50,7 @@ function HomePage(){
     }
   },[]);
 
+
   const fetchTasksTomorrow = useCallback(async(): Promise<void> => {
     try{
      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
@@ -66,27 +67,28 @@ function HomePage(){
     }
   }, []);
 
-  const fetchTasksYesterday = useCallback(async(): Promise<void> => {
+
+  const fetchTasksInTwoDays = useCallback(async(): Promise<void> => {
     try{
-      const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday');
+      const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days');
 
       const tasksWithLocalId = response.data.map((task: Task) => ({
         ...task,
         localId: crypto.randomUUID()
       }))
-      setTasksYesterday(tasksWithLocalId);
+      setTasksInTwoDays(tasksWithLocalId);
 
     }
     catch(error){
-      console.log("Could not load yesterday's tasks. Please try again later.", error);
+      console.log('Could not load tasks for the next two days. Please try again later.', error);
     }
   }, []);
 
   useEffect(() => {
    fetchTasksToday();
    fetchTasksTomorrow();
-   fetchTasksYesterday()
-  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksYesterday])
+   fetchTasksInTwoDays();
+  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays])
 
   const markTask = (id: string):void => {
     setTaskStatus(prev => ({ ...prev, [id]: 'not marked' }));
@@ -116,35 +118,35 @@ function HomePage(){
          <p>TASK MANAGER SUMMARY</p>
       </div>
       <div className="task-manager-cards">
-        <div className="task-manager-date yesterday-class">
-            YESTERDAY
-        </div>
         <div className="task-manager-date today-class">
             TODAY
         </div>
         <div className="task-manager-date tomorrow-class">
             TOMORROW
         </div>
+        <div className="task-manager-date in-two-days-class">
+            IN TWO DAYS
+        </div>
 
         <div className="task-manager-card">
-          <YesterdaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
-             unmarkedTask={unmarkedTask} tasksYesterday={tasksYesterday} 
-             fetchTasksYesterday={fetchTasksYesterday} />
-        </div>
-      
-        <div className="task-manager-card">
-           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
+          <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksToday={tasksToday} 
              fetchTasksToday={fetchTasksToday} />
         </div>
-
+      
         <div className="task-manager-card">
           <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 
              fetchTasksTomorrow={fetchTasksTomorrow} />
+        </div>
+
+        <div className="task-manager-card">
+          <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
+             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
+             unmarkedTask={unmarkedTask} tasksInTwoDays={tasksInTwoDays} 
+             fetchTasksInTwoDays={fetchTasksInTwoDays} />
         </div>
 
       </div>

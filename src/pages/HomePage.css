@@ -54,15 +54,15 @@ button:disabled:hover{
   padding: 10px;
 }
 
-.yesterday-class{
+.today-class{
   background-color: orange;
 }
 
-.today-class{
+.tomorrow-class{
   background-color: red;
 }
 
-.tomorrow-class{
+.in-two-days-class{
   background-color: green;
 }
 

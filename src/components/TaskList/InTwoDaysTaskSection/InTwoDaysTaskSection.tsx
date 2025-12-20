@@ -1,25 +1,25 @@
 import NoTasksAssigned from "../../NoTasksAssigned";
-import YesterdaysTaskList from "./YesterdaysTaskList";
 import type { Task, TaskStatusType } from "../../../pages/HomePage";
+import InTwoDaysTaskList from './InTwoDaysTaskList';
 
-type YesterdaysTaskSections = {
-  tasksYesterday: Task[];
+type InTwoDaysTaskSections = {
+  tasksInTwoDays: Task[];
   setTaskDetails:  React.Dispatch<React.SetStateAction<string | null>>;
   taskDetails: string | null;
-  fetchTasksYesterday: () => Promise<void>;
+  fetchTasksInTwoDays: () => Promise<void>;
   markTask: (status: string) => void;
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   taskStatus: Record<string, TaskStatusType>;
 }
 
-function YesterdaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, fetchTasksYesterday, tasksYesterday }: YesterdaysTaskSections){
+function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, fetchTasksInTwoDays, tasksInTwoDays }: InTwoDaysTaskSections){
 
   return(
     <>
-     {tasksYesterday.length === 0 ? <NoTasksAssigned /> : ( 
+     {tasksInTwoDays.length === 0 ? <NoTasksAssigned /> : ( 
        <ul className="todo-list">
-         {tasksYesterday.map(task => {
+         {tasksInTwoDays.map(task => {
            const isOpen = taskDetails === task.localId;
 
            const toggleTaskDetails = ():void => {
@@ -29,8 +29,8 @@ function YesterdaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTa
            const status = taskStatus[task.localId] || 'not marked';
                 
            return(
-             <YesterdaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-               tasksYesterday={tasksYesterday} task={task} fetchTasksYesterday={fetchTasksYesterday} 
+             <InTwoDaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
+               task={task} fetchTasksInTwoDays={fetchTasksInTwoDays} 
                setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask}
                unmarkedTask={unmarkedTask} status={status} />
            )
@@ -42,4 +42,4 @@ function YesterdaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTa
   )
 }
 
-export default YesterdaysTaskSection;
+export default InTwoDaysTaskSection;

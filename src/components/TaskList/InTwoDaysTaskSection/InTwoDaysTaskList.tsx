@@ -3,12 +3,11 @@ import axios from 'axios';
 import TaskDetails from '../../TaskDetails';
 import '../TaskList.css';
 
-type TaskYesterday = {
+type TaskInTwoDays = {
   isOpen: boolean;
   toggleTaskDetails: () => void;
-  tasksYesterday: Task[];
   task: Task;
-  fetchTasksYesterday: () => Promise<void>;
+  fetchTasksInTwoDays: () => Promise<void>;
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
   markTask: (status: string) => void;
   markedTask: (status: string) => void;
@@ -16,19 +15,19 @@ type TaskYesterday = {
   status: string;
 }
 
-function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterday,
- setTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskYesterday) {
+function InTwoDaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksInTwoDays,
+ setTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskInTwoDays) {
 
- const deleteTaskYesterday = async(): Promise<void> => {
+ const deleteTaskInTwoDays = async(): Promise<void> => {
   try{
-   await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-yesterday/${task.id}`);
+   await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days/${task.id}`);
    setTaskDetails(null);
   } 
   catch(error){
     console.log('Could not delete the task. Please try again later.', error);
   }
 
-  await fetchTasksYesterday();
+  await fetchTasksInTwoDays();
  };
 
  return(      
@@ -51,7 +50,7 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
   
      </div>
      {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTaskYesterday} markTask={markTask} markedTask={markedTask}
+      <TaskDetails task={task} onDelete={deleteTaskInTwoDays} markTask={markTask} markedTask={markedTask}
        unmarkedTask={unmarkedTask} />
       )
      }
@@ -59,4 +58,4 @@ function YesterdaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksYesterd
  )
 }
 
-export default YesterdaysTaskList;
+export default InTwoDaysTaskList;
