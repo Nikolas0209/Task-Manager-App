@@ -3,28 +3,30 @@ import { useState } from 'react';
 import axios from 'axios';
 
 type InputSection = {
-  fetchTasksToday: () => Promise<void>
-  fetchTasksTomorrow: () => Promise<void>
-} 
+  fetchTasksToday: () => Promise<void>;
+  fetchTasksTomorrow: () => Promise<void>;
+  fetchTasksInTwoDays: () => Promise<void>;
+};
 
-function TaskInput({ fetchTasksToday, fetchTasksTomorrow }: InputSection ){
+function TaskInput({ fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }: InputSection ){
   const [addTask, setAddTask] = useState <string>('');
 
   const addTodaysTask = async(): Promise<void> => {
     try{
       if(!addTask) return;
 
-      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks', {task: addTask,
-        isFinished: false,
+      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks', {
+        task: addTask,
         createdAt: new Date().toISOString()
       });
+
       setAddTask('');
       await fetchTasksToday();
     } 
     catch(error){
       console.log('Could not add a task. Please try again later.', error);
     }
-  }
+  };
 
   const addTomorrowsTask = async(): Promise<void> => {
     try{
@@ -32,24 +34,41 @@ function TaskInput({ fetchTasksToday, fetchTasksTomorrow }: InputSection ){
 
       await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
         task: addTask,
-        isFinished: false,
         createdAt: new Date().toISOString()
       });
+
       setAddTask('');
       await fetchTasksTomorrow();
     }
     catch(error){
-      console.log('Could not delete a task. Please try again later.', error);
+      console.log('Could not add a task. Please try again later.', error);
     }
-  }
+  };
+
+  const addInTwoDaysTask = async(): Promise<void> => {
+    try{
+      if(!addTask) return;
+
+      await axios.post('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days', {
+        task: addTask,
+        createdAt: new Date().toISOString()
+      });
+
+      setAddTask('');
+      await fetchTasksInTwoDays();
+    }
+    catch(error){
+      console.log('Could not add a task. Please try again later.', error);
+    }
+  };
 
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAddTask(event.target.value);
-  }
+  };
  
   const handleEscapeButton = (event: React.KeyboardEvent<HTMLInputElement>):void => {
     if(event.key === 'Escape') setAddTask('');
-  }
+  };
 
  return(
   <div className="input-container">
@@ -62,6 +81,9 @@ function TaskInput({ fetchTasksToday, fetchTasksTomorrow }: InputSection ){
    </button>
    <button className="add-button" onClick={addTomorrowsTask}>
      Add to tomorrow
+   </button>
+   <button className="add-button" onClick={addInTwoDaysTask}>
+     Add in two days
    </button>
 </div>
  )

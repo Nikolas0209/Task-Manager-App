@@ -90,15 +90,15 @@ function HomePage(){
    fetchTasksInTwoDays();
   }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays])
 
-  const markTask = (id: string):void => {
+  const markTask = (id: string): void => {
     setTaskStatus(prev => ({ ...prev, [id]: 'not marked' }));
    }; 
 
-   const markedTask = (id: string) => {
+   const markedTask = (id: string): void => {
     setTaskStatus(prev => ({ ...prev, [id]: 'marked' }));
    };
 
-   const unmarkedTask = (id: string) => {
+   const unmarkedTask = (id: string): void => {
     setTaskStatus(prev => ({ ...prev, [id]: 'unmarked' }));
    };
 
@@ -111,7 +111,8 @@ function HomePage(){
        </h1>
      </div>
 
-     <TaskInput fetchTasksToday={fetchTasksToday} fetchTasksTomorrow={fetchTasksTomorrow} />
+     <TaskInput fetchTasksToday={fetchTasksToday} fetchTasksTomorrow={fetchTasksTomorrow} 
+       fetchTasksInTwoDays={fetchTasksInTwoDays}/>
 
      <div className="task-manager-summary-container">
       <div className="task-manager-header">
