@@ -88,7 +88,20 @@ function HomePage(){
    fetchTasksToday();
    fetchTasksTomorrow();
    fetchTasksInTwoDays();
-  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays])
+  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays]);
+
+  useEffect(() => {
+    if(isInstructions === true){
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
+    }
+
+    return(() => {
+      document.body.classList.remove('no-scroll')
+    });
+
+  }, [isInstructions])
 
   const markTask = (id: string): void => {
     setTaskStatus(prev => ({ ...prev, [id]: 'not marked' }));
