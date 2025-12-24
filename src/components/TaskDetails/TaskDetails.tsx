@@ -1,9 +1,9 @@
 import './TaskDetails.css';
-import bin from '../assets/bin.png';
-import type { Task } from '../pages/HomePage';
-import undo from '../assets/undo.png';
-import checkedTask from '../assets/check.png';
-import uncheckedTask from '../assets/close.png';
+import bin from '../../assets/bin.png';
+import type { Task } from '../../pages/HomePage';
+import undo from '../../assets/undo.png';
+import checkedTask from '../../assets/check.png';
+import uncheckedTask from '../../assets/close.png';
  
 type TaskDetails = {
   task: Task;

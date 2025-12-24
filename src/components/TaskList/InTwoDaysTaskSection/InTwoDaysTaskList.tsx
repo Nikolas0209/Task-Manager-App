@@ -1,6 +1,6 @@
 import type { Task } from '../../../pages/HomePage';
 import axios from 'axios';
-import TaskDetails from '../../TaskDetails';
+import TaskDetails from '../../TaskDetails/TaskDetails';
 import '../TaskList.css';
 
 type TaskInTwoDays = {
