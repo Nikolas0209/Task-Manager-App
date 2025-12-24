@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import TaskManagerInstructions from '../components/TaskManagerInstructions';
-import TaskInput from '../components/TaskInput';
+import TaskInput from '../components/TaskInput/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
