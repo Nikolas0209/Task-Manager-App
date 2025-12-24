@@ -1,4 +1,4 @@
-import NoTasksAssigned from "../../NoTasksAssigned";
+import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import type { Task, TaskStatusType } from "../../../pages/HomePage";
 import TodaysTaskList from "./TodaysTaskList";
 
