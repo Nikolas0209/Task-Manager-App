@@ -46,7 +46,7 @@ function HomePage(){
       setTasksToday(tasksWithLocalId);
 
     } catch(error){
-      console.log('Cannot load the data. Please try again later.', error);
+      console.log("Cannot load the today's data. Please try again later.", error);
     }
   },[]);
 
@@ -63,7 +63,7 @@ function HomePage(){
 
     } 
     catch(error){
-     console.log("Could not load today's tasks. Please try again later", error);
+     console.log("Could not load tomorrow's tasks. Please try again later", error);
     }
   }, []);
 
