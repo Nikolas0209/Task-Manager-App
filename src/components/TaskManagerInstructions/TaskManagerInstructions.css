@@ -2,7 +2,11 @@
   position: fixed;
   left: 200px;
   right: 200px;
-  top: 50px
+  top: 50px;
+}
+
+.welcome-message-title{
+  padding-left: 7px;
 }
 
 .instructions-go-back-button-wrapper{
@@ -62,7 +66,6 @@
   align-items: flex-start;
   padding-bottom: 10px;
 }
-
 
 .instructions-sections ul{
   margin: 0;

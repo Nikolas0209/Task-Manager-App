@@ -149,7 +149,7 @@ function HomePage(){
              fetchTasksToday={fetchTasksToday} />
         </div>
       
-        <div className="task-manager-card">
+        <div className="task-manager-card task-manager-card-tomorrow">
           <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 

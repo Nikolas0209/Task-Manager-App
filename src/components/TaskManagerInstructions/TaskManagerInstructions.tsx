@@ -15,7 +15,9 @@ function TaskManagerInstructions({ toggleInstructions }: Instructions){
       </div>
       <div className="instructions-on">
 
-      <h3>Welcome to the Task Manager App</h3>
+      <h3 className="welcome-message-title">
+        Welcome to the Task Manager App
+      </h3>
     
       <section className="instructions-text-container">
         <p className="instructions-paragraphs"> 
