@@ -48,3 +48,15 @@ button:disabled:hover{
     font-size: 15px;
   }
 }
+
+@media(max-width: 916px){
+  .task-details{
+    white-space: nowrap;
+    font-size: 15px !important;
+    min-width: 200px;
+  }
+
+  .date-span{
+    padding-left: 10px;
+  } 
+}

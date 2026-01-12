@@ -31,7 +31,7 @@ function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask }: Tas
          </button>
        </div>
      </div>
-       Assigned on: {new Date(task.createdAt).toLocaleDateString()}
+       Assigned on: <span className="date-span">{new Date(task.createdAt).toLocaleDateString()}</span>
        <div className="delete-task-container">
          Delete Task:
          <button className="delete-task-button" onClick={onDelete}>
