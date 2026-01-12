@@ -2,7 +2,7 @@ body{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-body.no-scroll {
+body.no-scroll{
   overflow: hidden;
 }
 
@@ -19,3 +19,32 @@ button:disabled:hover{
   filter: blur(4px);
 }
 
+@media (max-width: 1440px){
+  .instructions-container{
+    left: 100px !important;
+    right: 100px !important;
+    top: 25px !important;
+    bottom: 50px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .instructions-text-container{
+    padding-right: 15px;
+  }
+}
+
+@media(max-width: 546px){
+  .instructions-container{
+    font-size: 14px;
+    bottom: 50px !important;
+  }
+
+  .instructions-text-container{
+    padding-right: 15px;
+  }
+
+  h3{
+    white-space: nowrap;
+    font-size: 15px;
+  }
+}
