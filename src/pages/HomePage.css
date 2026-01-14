@@ -94,4 +94,7 @@
   font-size: 15px;
 }
 
-
+.instructions-overlay{
+  position: fixed;
+  inset: 0;
+}

@@ -180,7 +180,9 @@ function HomePage(){
      </div>
 
       {isInstructions &&
-       <TaskManagerInstructions toggleInstructions={toggleInstructions} />
+       <div className="instructions-overlay">
+         <TaskManagerInstructions toggleInstructions={toggleInstructions} />
+       </div>
       }
     </>
   )
