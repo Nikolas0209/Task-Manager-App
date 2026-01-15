@@ -38,6 +38,11 @@ function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask }: Tas
            <img src={bin} className="bin-image"/>
          </button>
        </div>
+       <div className="move-to-history-container">
+        <button className="move-to-history-button">
+          Move to History
+        </button>
+       </div>
     </div> 
  )
 };

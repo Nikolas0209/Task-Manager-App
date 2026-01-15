@@ -37,3 +37,14 @@
 .bin-image{
   height: 20px;
 }
+
+.move-to-history-container{
+  padding-top: 12px;
+}
+
+.move-to-history-button{
+  cursor: pointer;
+  font-size: 15px;
+  color: rgb(65, 65, 65);
+  padding: 3px;
+}
