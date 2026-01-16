@@ -1,30 +1,29 @@
 import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import TaskManagerInstructions from '../components/TaskManagerInstructions/TaskManagerInstructions';
 import TaskInput from '../components/TaskInput/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
+import type { Task } from '../App';
 
 export type TaskStatusType = 'marked' | 'unmarked' | 'not marked';
 
-export type Task = {
-  createdAt: Date;
-  task: string;
-  isFinished: boolean;
-  id: string;
-  localId: string;
+type HomePageTask = {
+  tasksToday: Task[];
+  tasksTomorrow: Task[];
+  tasksInTwoDays: Task[];
+  fetchTasksToday: () => Promise<void>;
+  fetchTasksTomorrow: () => Promise<void>;
+  fetchTasksInTwoDays: () => Promise<void>;
 }
 
-function HomePage(){
+function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }: HomePageTask ){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
-  const [tasksToday, setTasksToday] = useState<Task[]>([]);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
-  const [tasksTomorrow, setTasksTomorrow] = useState<Task[]>([]);
-  const [tasksInTwoDays, setTasksInTwoDays] = useState<Task[]>([]);
+  
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
 
   const toggleInstructions = (): void => {
@@ -34,61 +33,6 @@ function HomePage(){
   const taskHistory = (): void => {
     navigate('/task-history');
   }
-
-  const fetchTasksToday = useCallback(async(): Promise<void> => {
-    try{
-      const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
-     
-      const tasksWithLocalId = response.data.map((task: Task) => ({
-        ...task,
-        localId: crypto.randomUUID()
-      }))
-      setTasksToday(tasksWithLocalId);
-
-    } catch(error){
-      console.log("Cannot load the today's data. Please try again later.", error);
-    }
-  },[]);
-
-
-  const fetchTasksTomorrow = useCallback(async(): Promise<void> => {
-    try{
-     const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow');
-
-     const tasksWithLocalId = response.data.map((task: Task) => ({
-      ...task,
-      localId: crypto.randomUUID()
-     }))
-     setTasksTomorrow(tasksWithLocalId);
-
-    } 
-    catch(error){
-     console.log("Could not load tomorrow's tasks. Please try again later", error);
-    }
-  }, []);
-
-
-  const fetchTasksInTwoDays = useCallback(async(): Promise<void> => {
-    try{
-      const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days');
-
-      const tasksWithLocalId = response.data.map((task: Task) => ({
-        ...task,
-        localId: crypto.randomUUID()
-      }))
-      setTasksInTwoDays(tasksWithLocalId);
-
-    }
-    catch(error){
-      console.log('Could not load tasks for the next two days. Please try again later.', error);
-    }
-  }, []);
-
-  useEffect(() => {
-   fetchTasksToday();
-   fetchTasksTomorrow();
-   fetchTasksInTwoDays();
-  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays]);
 
   useEffect(() => {
     if(isInstructions === true){

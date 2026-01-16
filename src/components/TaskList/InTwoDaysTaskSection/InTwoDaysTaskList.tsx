@@ -1,4 +1,4 @@
-import type { Task } from '../../../pages/HomePage';
+import type { Task } from '../../../App';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import '../TaskList.css';
