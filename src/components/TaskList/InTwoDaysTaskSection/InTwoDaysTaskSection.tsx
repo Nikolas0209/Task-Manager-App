@@ -12,9 +12,10 @@ type InTwoDaysTaskSections = {
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   taskStatus: Record<string, TaskStatusType>;
+  moveTaskToHistory: (taskId: string) => void;
 }
 
-function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, fetchTasksInTwoDays, tasksInTwoDays }: InTwoDaysTaskSections){
+function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, fetchTasksInTwoDays, tasksInTwoDays, moveTaskToHistory }: InTwoDaysTaskSections){
 
   return(
     <>
@@ -33,7 +34,7 @@ function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTas
              <InTwoDaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
                task={task} fetchTasksInTwoDays={fetchTasksInTwoDays} 
                setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask}
-               unmarkedTask={unmarkedTask} status={status} />
+               unmarkedTask={unmarkedTask} status={status} moveTaskToHistory={moveTaskToHistory}/>
            )
           })}
         </ul>

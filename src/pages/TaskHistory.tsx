@@ -1,5 +1,13 @@
 import './TaskHistory.css';
 import { useNavigate } from 'react-router-dom';
+import type { Task } from '../App';
+
+type TaskHistory = {
+  tasksToday: Task[];
+  tasksTomorrow: Task[];
+  tasksInTwoDays: Task[];
+
+}
 
 function TaskHistory(){
   const navigate = useNavigate();

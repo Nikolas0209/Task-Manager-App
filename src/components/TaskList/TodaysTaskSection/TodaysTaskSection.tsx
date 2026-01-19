@@ -12,9 +12,10 @@ type TaskSections = {
  unmarkedTask: (status: string) => void;
  tasksToday: Task[];
  fetchTasksToday: () => Promise<void>;
+ moveTaskToHistory: (taskId: string) => void;
 };
 
-function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, tasksToday, fetchTasksToday }: TaskSections ){
+function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, tasksToday, fetchTasksToday, moveTaskToHistory }: TaskSections ){
 
   return(
     <> 
@@ -32,7 +33,7 @@ function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, 
            return(
              <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
                fetchTasksToday={fetchTasksToday} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-               markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask} status={status} />
+               markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask} status={status} moveTaskToHistory={moveTaskToHistory}/>
             )
            })
          }

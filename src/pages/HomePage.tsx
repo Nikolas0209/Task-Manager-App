@@ -17,14 +17,21 @@ type HomePageTask = {
   fetchTasksToday: () => Promise<void>;
   fetchTasksTomorrow: () => Promise<void>;
   fetchTasksInTwoDays: () => Promise<void>;
-}
+  moveTaskToHistory: {
+    today: (task: string) => Promise<void>,
+    tomorrow: (task: string) => Promise<void>,
+    twoDaysAfter: (task: string) => Promise<void>
+  };
+};
 
-function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }: HomePageTask ){
+function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays,
+   moveTaskToHistory}: HomePageTask ){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
-  
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
+
+  const {today, tomorrow, twoDaysAfter} = moveTaskToHistory;
 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -90,21 +97,21 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksToday={tasksToday} 
-             fetchTasksToday={fetchTasksToday} />
+             fetchTasksToday={fetchTasksToday} moveTaskToHistory={today} />
         </div>
       
         <div className="task-manager-card task-manager-card-tomorrow">
           <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 
-             fetchTasksTomorrow={fetchTasksTomorrow} />
+             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={tomorrow} />
         </div>
 
         <div className="task-manager-card">
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksInTwoDays={tasksInTwoDays} 
-             fetchTasksInTwoDays={fetchTasksInTwoDays} />
+             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={twoDaysAfter} />
         </div>
 
       </div>

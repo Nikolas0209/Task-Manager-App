@@ -13,9 +13,10 @@ type TaskToday = {
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   status: string;
+  moveTaskToHistory: (taskId: string) => void;
 };
 
-function TodaysTaskList({ task, setTaskDetails, fetchTasksToday, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status }: TaskToday){
+function TodaysTaskList({ task, setTaskDetails, fetchTasksToday, isOpen, toggleTaskDetails, markTask, markedTask, unmarkedTask, status, moveTaskToHistory }: TaskToday){
 
   const deleteTask = async(): Promise<void> => {
     try{
@@ -48,7 +49,7 @@ function TodaysTaskList({ task, setTaskDetails, fetchTasksToday, isOpen, toggleT
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} unmarkedTask={unmarkedTask} markedTask={markedTask} />
+      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} unmarkedTask={unmarkedTask} markedTask={markedTask} moveTaskToHistory={moveTaskToHistory}/>
       )
     }
    </li> 

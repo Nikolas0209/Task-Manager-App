@@ -1,6 +1,6 @@
 import './TaskDetails.css';
 import bin from '../../assets/bin.png';
-import type { Task } from '../../pages/HomePage';
+import type { Task } from '../../App';
 import undo from '../../assets/undo.png';
 import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';
@@ -11,10 +11,11 @@ type TaskDetails = {
   markTask: (status: string) => void;
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
+  moveTaskToHistory: (taskId: string) => void;
 }
 
-function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask }: TaskDetails){ 
- 
+function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask, moveTaskToHistory }: TaskDetails){ 
+
  return(
    <div className="task-details task-details-tomorrow">
      <div className="task-state-container">
@@ -39,7 +40,7 @@ function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask }: Tas
          </button>
        </div>
        <div className="move-to-history-container">
-        <button className="move-to-history-button">
+        <button className="move-to-history-button" onClick={() => moveTaskToHistory(task.id)}>
           Move to History
         </button>
        </div>
