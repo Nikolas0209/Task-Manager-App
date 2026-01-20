@@ -3,13 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import type { Task } from '../App';
 
 type TaskHistory = {
-  tasksToday: Task[];
-  tasksTomorrow: Task[];
-  tasksInTwoDays: Task[];
-
+  taskHistory: Task[];
 }
 
-function TaskHistory(){
+function TaskHistory({ taskHistory }: TaskHistory ){
   const navigate = useNavigate();
  
   const goBack = (): void => {
@@ -33,8 +30,17 @@ function TaskHistory(){
         Task History
       </h2>
       <div className="task-history-details">
-        Task 1 status: unfinished date  delete task<br/>
-        Task 2 status: finished datev delete task
+        {taskHistory.map(task => {
+          return(
+            <div className="history-task-div" key={task.id}>
+              <div>{task.task}</div>
+              <div>Date assigned: {new Date(task.createdAt).toLocaleDateString()}</div>
+              <div>
+                <button>Delete</button>
+              </div>
+            </div>
+          )
+         })}
       </div>
     </div> 
    </>

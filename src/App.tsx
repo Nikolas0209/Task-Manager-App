@@ -19,8 +19,6 @@ function App(){
   const [tasksInTwoDays, setTasksInTwoDays] = useState <Task[]>([]);
   const [taskHistory, setTaskHistory] = useState <Task[]>([]);
 
-   console.log(taskHistory)
-
   const fetchTasksToday = useCallback(async(): Promise<void> => {
     try{
       const response = await axios.get('https://692488a63ad095fb8474968f.mockapi.io/tasks');
@@ -121,8 +119,7 @@ function App(){
     setTaskHistory(prev => [...prev, moveTask]);
     setTasksInTwoDays(prev => prev.filter((task: Task) => task.id !== taskId));
   };
-
-
+ 
   return (
     <BrowserRouter>
      <Routes>
@@ -134,7 +131,7 @@ function App(){
           tomorrow: moveTomorrowsTaskToHistory,
           twoDaysAfter: moveTaskInTwoDaysToHistory
           }} />} />
-       <Route path='/task-history' element={<TaskHistory  />} />
+       <Route path='/task-history' element={<TaskHistory taskHistory={taskHistory} />} />
      </Routes>
     </BrowserRouter>
   )
