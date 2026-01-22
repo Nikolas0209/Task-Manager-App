@@ -119,7 +119,7 @@ function App(){
     setTaskHistory(prev => [...prev, moveTask]);
     setTasksInTwoDays(prev => prev.filter((task: Task) => task.id !== taskId));
   };
- 
+
   return (
     <BrowserRouter>
      <Routes>

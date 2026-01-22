@@ -30,7 +30,7 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
-
+  
   const {today, tomorrow, twoDaysAfter} = moveTaskToHistory;
 
   const toggleInstructions = (): void => {

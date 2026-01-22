@@ -1,0 +1,11 @@
+.empty-task-history-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.empty-task-history-paragrah{
+  color: royalblue;
+  font-weight: bold;
+}

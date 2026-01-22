@@ -1,6 +1,7 @@
 import './TaskHistory.css';
 import { useNavigate } from 'react-router-dom';
 import type { Task } from '../App';
+import EmptyTaskHistory from '../components/EmptyTaskHistory/EmptyTaskHistory';
 
 type TaskHistory = {
   taskHistory: Task[];
@@ -30,7 +31,8 @@ function TaskHistory({ taskHistory }: TaskHistory ){
         Task History
       </h2>
       <div className="task-history-details">
-        {taskHistory.map(task => {
+       {taskHistory.length === 0 ? <EmptyTaskHistory/> :
+         taskHistory.map(task => {
           return(
             <div className="history-task-div" key={task.id}>
               <div>{task.task}</div>
@@ -40,7 +42,8 @@ function TaskHistory({ taskHistory }: TaskHistory ){
               </div>
             </div>
           )
-         })}
+         })
+        }
       </div>
     </div> 
    </>
