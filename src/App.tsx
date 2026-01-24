@@ -68,11 +68,22 @@ function App(){
     }
   }, []);
 
+  const fetchTaskHistoryTasks = useCallback(async(): Promise<void> => {
+    try{
+      const response = await axios.get('https://69288e25b35b4ffc50161e2b.mockapi.io/task-history');
+      setTaskHistory(response.data);
+    }
+    catch(error){
+      console.log('Could not load task history. Please try again later.', error);
+    }
+  }, [])
+
   useEffect(() => {
    fetchTasksToday();
    fetchTasksTomorrow();
    fetchTasksInTwoDays();
-  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays]);
+   fetchTaskHistoryTasks();
+  }, [fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays, fetchTaskHistoryTasks]);
 
   
   const moveTodaysTaskToHistory = async(taskId: string): Promise<void> => {
