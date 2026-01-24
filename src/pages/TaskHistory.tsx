@@ -5,9 +5,10 @@ import EmptyTaskHistory from '../components/EmptyTaskHistory/EmptyTaskHistory';
 
 type TaskHistory = {
   taskHistory: Task[];
+  deleteHistoryTask: (taskId: string) => Promise<void>;
 }
 
-function TaskHistory({ taskHistory }: TaskHistory ){
+function TaskHistory({ taskHistory, deleteHistoryTask }: TaskHistory ){
   const navigate = useNavigate();
  
   const goBack = (): void => {
@@ -38,7 +39,7 @@ function TaskHistory({ taskHistory }: TaskHistory ){
               <div>{task.task}</div>
               <div>Date assigned: {new Date(task.createdAt).toLocaleDateString()}</div>
               <div>
-                <button>Delete</button>
+                <button onClick={() => deleteHistoryTask(task.id)}>Delete</button>
               </div>
             </div>
           )
