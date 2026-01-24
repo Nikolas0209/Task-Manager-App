@@ -39,7 +39,10 @@ function TaskHistory({ taskHistory, deleteHistoryTask }: TaskHistory ){
               <div>{task.task}</div>
               <div>Date assigned: {new Date(task.createdAt).toLocaleDateString()}</div>
               <div>
-                <button onClick={() => deleteHistoryTask(task.id)}>Delete</button>
+                <button className="delete-history-task" 
+                 onClick={() => deleteHistoryTask(task.id)}>
+                  Delete
+                </button>
               </div>
             </div>
           )
