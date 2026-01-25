@@ -1,73 +1,98 @@
-# React + TypeScript + Vite
+# Task Manager Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive task management web application built with **React** and **TypeScript**, designed to practice structured programming, component-based architecture, and basic state management. Users can create, manage, and organize tasks through a clean, intuitive interface that adapts seamlessly to both desktop and mobile screens.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- Create new tasks with a title and description  
+- Mark tasks as completed  
+- Delete tasks  
+- Real-time UI updates using React state  
+- Simple and clean user interface  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Data Handling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The application uses a **simulated API** to fetch task data. This allows practice with asynchronous API requests and state management in React without requiring a real backend.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Technologies
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- React  
+- TypeScript  
+- JavaScript (ES6+)  
+- HTML5  
+- CSS3  
+
+---
+
+## Installation and Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Nikolas0209/task-manager.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Navigate to the project directory:
+```bash
+cd task-manager
 ```
+
+3. Install dependencies:
+```bash
+npm install
+```
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+---
+
+## Project Status
+
+🚧 **In progress**  
+Currently working on optimization for better efficiency.
+
+---
+
+## Future Improvements
+
+- The project is functional as is; future improvements will be considered as I continue learning.
+
+---
+
+## Project Structure
+
+```bash
+task-manager/
+├── node_modules/
+├── public/
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/           # Page-level components
+│   ├── App.tsx          # Root component
+│   ├── main.tsx         # Entry point
+│   └── App.css          # Styling
+├── package.json
+├── tsconfig.json
+└── vite.config.ts 
+
+---
+
+## Screenshots
+
+### Desktop View
+
+![Home Page](screenshots/desktop/home-page-screenshot-one.png)
+
+![Home Page](screenshots/desktop/home-page-screenshot-two.png)
+
+![Instructions Panel](screenshots/desktop/instructions-panel.png)
+
+![Task History Page](screenshots/desktop/task-history-page.png)
