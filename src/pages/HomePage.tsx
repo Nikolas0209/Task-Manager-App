@@ -22,10 +22,11 @@ type HomePageTask = {
     tomorrow: (task: string) => Promise<void>,
     twoDaysAfter: (task: string) => Promise<void>
   };
+  isLoading: boolean;
 };
 
-function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays,
-   moveTaskToHistory}: HomePageTask ){
+function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, fetchTasksTomorrow, 
+  fetchTasksInTwoDays, moveTaskToHistory, isLoading }: HomePageTask ){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
@@ -97,21 +98,24 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksToday={tasksToday} 
-             fetchTasksToday={fetchTasksToday} moveTaskToHistory={today} />
+             fetchTasksToday={fetchTasksToday} moveTaskToHistory={today} 
+             isLoading={isLoading} />
         </div>
       
         <div className="task-manager-card task-manager-card-tomorrow">
           <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 
-             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={tomorrow} />
+             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={tomorrow} 
+             isLoading={isLoading} />
         </div>
 
         <div className="task-manager-card">
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksInTwoDays={tasksInTwoDays} 
-             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={twoDaysAfter} />
+             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={twoDaysAfter}
+             isLoading={isLoading} />
         </div>
 
       </div>

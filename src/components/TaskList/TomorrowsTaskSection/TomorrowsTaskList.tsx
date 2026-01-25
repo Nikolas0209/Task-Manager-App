@@ -14,10 +14,11 @@ type TaskTomorrow = {
   unmarkedTask: (status: string) => void;
   status: string;
   moveTaskToHistory: (taskId: string) => void;
+  isLoading: boolean
 }
 
 function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow, 
-   markTask, markedTask, unmarkedTask, status, moveTaskToHistory }: TaskTomorrow){
+   markTask, markedTask, unmarkedTask, status, moveTaskToHistory, isLoading }: TaskTomorrow){
 
   const deleteTaskTomorrow = async (): Promise<void>  => {
     try{
@@ -53,7 +54,7 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
 
     {isOpen && (
       <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} markedTask={markedTask} 
-       unmarkedTask={unmarkedTask} moveTaskToHistory={moveTaskToHistory}/>
+       unmarkedTask={unmarkedTask} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
      )
     }
    </li> 

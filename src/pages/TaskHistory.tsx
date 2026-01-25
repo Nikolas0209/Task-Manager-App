@@ -6,9 +6,10 @@ import EmptyTaskHistory from '../components/EmptyTaskHistory/EmptyTaskHistory';
 type TaskHistory = {
   taskHistory: Task[];
   deleteHistoryTask: (taskId: string) => Promise<void>;
+  isLoading: boolean
 }
 
-function TaskHistory({ taskHistory, deleteHistoryTask }: TaskHistory ){
+function TaskHistory({ taskHistory, deleteHistoryTask, isLoading }: TaskHistory ){
   const navigate = useNavigate();
  
   const goBack = (): void => {
@@ -39,7 +40,7 @@ function TaskHistory({ taskHistory, deleteHistoryTask }: TaskHistory ){
               <div>{task.task}</div>
               <div>Date assigned: {new Date(task.createdAt).toLocaleDateString()}</div>
               <div>
-                <button className="delete-history-task" 
+                <button className="delete-history-task" disabled={isLoading} 
                  onClick={() => deleteHistoryTask(task.id)}>
                   Delete
                 </button>

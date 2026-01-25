@@ -18,6 +18,7 @@ function App(){
   const [tasksTomorrow, setTasksTomorrow] = useState <Task[]>([]);
   const [tasksInTwoDays, setTasksInTwoDays] = useState <Task[]>([]);
   const [taskHistory, setTaskHistory] = useState <Task[]>([]);
+  const [isLoading, setIsLoading] = useState <boolean>(false);
 
   const fetchTasksToday = useCallback(async(): Promise<void> => {
     try{
@@ -89,6 +90,8 @@ function App(){
     const moveTask = tasksToday.find((foundTask: Task) => foundTask.id === taskId);
     if(!moveTask) return;
 
+    setIsLoading(true);
+
     try{
      const response = await axios.post('https://69288e25b35b4ffc50161e2b.mockapi.io/task-history', moveTask);
      const newHistoryTask = response.data;
@@ -101,11 +104,16 @@ function App(){
     catch(error){
       console.log('Could not move the task. Please try again later.', error);
     }
+    finally{
+      setIsLoading(false);
+    }
   };
 
   const moveTomorrowsTaskToHistory = async(taskId: string): Promise<void> => {
     const moveTask = tasksTomorrow.find((foundTask: Task) => taskId === foundTask.id);
     if(!moveTask) return;
+
+    setIsLoading(true);
 
     try{
      const response = await axios.post('https://69288e25b35b4ffc50161e2b.mockapi.io/task-history', moveTask);
@@ -119,11 +127,16 @@ function App(){
     catch(error){
       console.log('Could not move the task. Please try again later.', error);
     }
+    finally{
+      setIsLoading(false);
+    }
   };
 
   const moveTaskInTwoDaysToHistory = async(taskId: string): Promise<void> => {
     const moveTask = tasksInTwoDays.find((foundTask: Task) => taskId === foundTask.id);
     if(!moveTask) return;
+
+    setIsLoading(true);
 
     try{
      const response = await axios.post('https://69288e25b35b4ffc50161e2b.mockapi.io/task-history', moveTask);
@@ -137,17 +150,24 @@ function App(){
     catch(error){
       console.log('Could not move the task. Please try again later.', error);
     }
+    finally{
+      setIsLoading(false);
+    }
   };
 
   const deleteHistoryTask = async(taskId: string): Promise<void> => {
+    setIsLoading(true);
+
     try{
       await axios.delete(`https://69288e25b35b4ffc50161e2b.mockapi.io/task-history/${taskId}`);
+      await fetchTaskHistoryTasks();
     }
     catch(error){
       console.log('Could not delete the task. Please try again later.', error);
-    }
-
-    await fetchTaskHistoryTasks();
+    } 
+    finally{
+      setIsLoading(false);
+    } 
   };
 
   return (
@@ -160,9 +180,9 @@ function App(){
           today: moveTodaysTaskToHistory,
           tomorrow: moveTomorrowsTaskToHistory,
           twoDaysAfter: moveTaskInTwoDaysToHistory
-          }} />} />
+          }} isLoading={isLoading} />} />
        <Route path='/task-history' element={<TaskHistory taskHistory={taskHistory} 
-         deleteHistoryTask={deleteHistoryTask} />} />
+         deleteHistoryTask={deleteHistoryTask} isLoading={isLoading}/>} />
      </Routes>
     </BrowserRouter>
   )

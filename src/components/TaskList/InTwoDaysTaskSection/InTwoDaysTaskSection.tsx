@@ -13,9 +13,10 @@ type InTwoDaysTaskSections = {
   unmarkedTask: (status: string) => void;
   taskStatus: Record<string, TaskStatusType>;
   moveTaskToHistory: (taskId: string) => void;
+  isLoading: boolean;
 }
 
-function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, fetchTasksInTwoDays, tasksInTwoDays, moveTaskToHistory }: InTwoDaysTaskSections){
+function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, fetchTasksInTwoDays, tasksInTwoDays, moveTaskToHistory, isLoading }: InTwoDaysTaskSections){
 
   return(
     <>
@@ -34,7 +35,8 @@ function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTas
              <InTwoDaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
                task={task} fetchTasksInTwoDays={fetchTasksInTwoDays} 
                setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask}
-               unmarkedTask={unmarkedTask} status={status} moveTaskToHistory={moveTaskToHistory}/>
+               unmarkedTask={unmarkedTask} status={status} moveTaskToHistory={moveTaskToHistory} 
+               isLoading={isLoading} />
            )
           })}
         </ul>

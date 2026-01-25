@@ -12,9 +12,11 @@ type TaskDetails = {
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   moveTaskToHistory: (taskId: string) => void;
+  isLoading: boolean;
 }
 
-function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask, moveTaskToHistory }: TaskDetails){ 
+function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
+    moveTaskToHistory, isLoading }: TaskDetails){ 
 
  return(
    <div className="task-details task-details-tomorrow">
@@ -40,7 +42,7 @@ function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask, moveT
          </button>
        </div>
        <div className="move-to-history-container">
-        <button className="move-to-history-button" onClick={() => moveTaskToHistory(task.id)}>
+        <button className="move-to-history-button" disabled={isLoading} onClick={() => moveTaskToHistory(task.id)}>
           Move to History
         </button>
        </div>
