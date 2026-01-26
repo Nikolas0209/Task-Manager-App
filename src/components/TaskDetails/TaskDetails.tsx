@@ -13,13 +13,14 @@ type TaskDetails = {
   unmarkedTask: (status: string) => void;
   moveTaskToHistory: (taskId: string) => void;
   isLoading: boolean;
+  columnClass?: string;
 }
 
 function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
-    moveTaskToHistory, isLoading }: TaskDetails){ 
-
+  moveTaskToHistory, isLoading, columnClass }: TaskDetails){ 
+  
  return(
-   <div className="task-details task-details-tomorrow">
+   <div className={`task-details ${columnClass || ''}`}>
      <div className="task-state-container">
        Select status:
        <div>

@@ -22,7 +22,7 @@ function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, 
     <> 
      {tasksToday.length === 0 ? <NoTasksAssigned /> : (
        <ul className="todo-list">
-         {tasksToday.map(task => {
+         {tasksToday.map((task, index) => {
            const isOpen = taskDetails === task.localId;
 
            const toggleTaskDetails = (): void => {
@@ -34,7 +34,9 @@ function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, 
            return(
              <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
                fetchTasksToday={fetchTasksToday} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-               markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask} status={status} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
+               markTask={markTask} markedTask={markedTask} unmarkedTask={unmarkedTask} status={status} 
+               moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} 
+               columnClass={index === 0 ? 'first-column' : ''} />
             )
            })
          }
