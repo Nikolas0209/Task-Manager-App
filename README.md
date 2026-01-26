@@ -88,7 +88,7 @@ task-manager/
 ## Screenshots
 
 
-![Home Page](https://raw.githubusercontent.com/username/repo/main/screenshots/home-page-screenshot-one.png)
-![Home Page](https://raw.githubusercontent.com/username/repo/main/screenshots/home-page-screenshot-two.png)
-![Instructions Panel](https://raw.githubusercontent.com/username/repo/main/screenshots/instructions-panel.png)
-![Task History Page](https://raw.githubusercontent.com/username/repo/main/screenshots/task-history-page.png)
+![Home Page](https://raw.githubusercontent.com/nikolas0209/Task-Manager-App/main/screenshots/home-page-screenshot-one.png)
+![Home Page](https://raw.githubusercontent.com/nikolas0209/Task-Manager-App/main/screenshots/home-page-screenshot-two.png)
+![Instructions Panel](https://raw.githubusercontent.com/nikolas0209/Task-Manager-App/main/screenshots/instructions-panel.png)
+![Task History Page](https://raw.githubusercontent.com/nikolas0209/Task-Manager-App/main/screenshots/task-history-page.png)
