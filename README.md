@@ -89,10 +89,10 @@ task-manager/
 
 ### Desktop View
 
-![Home Page](screenshots/desktop/home-page-screenshot-one.png)
+![Home Page](./screenshots/desktop/home-page-screenshot-one.png)
 
-![Home Page](screenshots/desktop/home-page-screenshot-two.png)
+![Home Page](./screenshots/desktop/home-page-screenshot-two.png)
 
-![Instructions Panel](screenshots/desktop/instructions-panel.png)
+![Instructions Panel](./screenshots/desktop/instructions-panel.png)
 
-![Task History Page](screenshots/desktop/task-history-page.png)
+![Task History Page](./screenshots/desktop/task-history-page.png)
