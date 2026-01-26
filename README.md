@@ -1,6 +1,6 @@
 # Task Manager Application
 
-A responsive task management web application built with **React** and **TypeScript**, designed to practice structured programming, component-based architecture, and basic state management. Users can create, manage, and organize tasks through a clean, intuitive interface that adapts seamlessly to both desktop and mobile screens.
+A task management web application developed with React and TypeScript, designed to provide a clean and intuitive interface. Users can create, manage, and organize tasks, while the project demonstrates structured programming, component-based architecture, and basic state management techniques
 
 ---
 
