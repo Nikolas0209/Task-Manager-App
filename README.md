@@ -87,12 +87,8 @@ task-manager/
 
 ## Screenshots
 
-### Desktop View
 
-![Home Page](./screenshots/desktop/home-page-screenshot-one.png)
-
-![Home Page](./screenshots/desktop/home-page-screenshot-two.png)
-
-![Instructions Panel](./screenshots/desktop/instructions-panel.png)
-
-![Task History Page](./screenshots/desktop/task-history-page.png)
+![Home Page](https://raw.githubusercontent.com/username/repo/main/screenshots/home-page-screenshot-one.png)
+![Home Page](https://raw.githubusercontent.com/username/repo/main/screenshots/home-page-screenshot-two.png)
+![Instructions Panel](https://raw.githubusercontent.com/username/repo/main/screenshots/instructions-panel.png)
+![Task History Page](https://raw.githubusercontent.com/username/repo/main/screenshots/task-history-page.png)
