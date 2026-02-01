@@ -4,14 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TaskHistory from './pages/TaskHistory';
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import type { Task } from './types/taskType';
 
-export type Task = {
-  createdAt: Date;
-  task: string;
-  isFinished: boolean;
-  id: string;
-  localId: string;
-}
 
 function App(){
   const [tasksToday, setTasksToday] = useState <Task[]>([]);

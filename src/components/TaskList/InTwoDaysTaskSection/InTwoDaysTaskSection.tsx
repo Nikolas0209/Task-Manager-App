@@ -1,6 +1,6 @@
 import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
-import type {TaskStatusType } from "../../../pages/HomePage";
-import type { Task } from '../../../App';
+import type {TaskStatusType } from "../../../types/taskStatusType";
+import type { Task } from '../../../types/taskType';
 import InTwoDaysTaskList from './InTwoDaysTaskList';
 
 type InTwoDaysTaskSections = {

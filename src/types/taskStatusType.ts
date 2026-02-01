@@ -1,0 +1,1 @@
+export type TaskStatusType = 'marked' | 'unmarked' | 'not marked';

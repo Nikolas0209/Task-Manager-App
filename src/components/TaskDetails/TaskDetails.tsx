@@ -1,6 +1,6 @@
 import './TaskDetails.css';
 import bin from '../../assets/bin.png';
-import type { Task } from '../../App';
+import type { Task } from '../../types/taskType';
 import undo from '../../assets/undo.png';
 import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';

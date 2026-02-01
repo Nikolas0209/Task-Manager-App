@@ -1,5 +1,5 @@
 import '../TaskList.css';
-import type { Task } from '../../../App';
+import type { Task } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 

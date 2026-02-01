@@ -6,9 +6,8 @@ import TaskInput from '../components/TaskInput/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
-import type { Task } from '../App';
-
-export type TaskStatusType = 'marked' | 'unmarked' | 'not marked';
+import type { Task } from '../types/taskType';
+import type { TaskStatusType } from '../types/taskStatusType';
 
 type HomePageTask = {
   tasksToday: Task[];
