@@ -9,7 +9,6 @@ import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/In
 import type { Task, TaskSource } from '../types/taskType';
 import type { TaskStatusType } from '../types/taskStatusType';
 
-
 type HomePageTask = {
   tasksToday: Task[];
   tasksTomorrow: Task[];
@@ -21,13 +20,13 @@ type HomePageTask = {
   isLoading: boolean;
 };
 
-function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, fetchTasksTomorrow, 
-  fetchTasksInTwoDays, moveTaskToHistory, isLoading }: HomePageTask ){
+function HomePage({ moveTaskToHistory, isLoading, tasksToday, tasksTomorrow, tasksInTwoDays,
+  fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }: HomePageTask ){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
-  
+ 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
   } 

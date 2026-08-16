@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import type { Task, TaskSource } from "../types/taskType";
 import axios from "axios";
+import { moveTaskToHistoryApi } from "../api/moveTaskToHistroryApi";
 
 type TaskType = {
   tasksToday: Task[];
@@ -54,10 +55,7 @@ export function useTaskHistory({ tasksToday, tasksTomorrow, tasksInTwoDays, setT
     setIsLoading(true);
   
     try{
-     const response = await axios.post('https://69288e25b35b4ffc50161e2b.mockapi.io/task-history', moveTask);
-     const newHistoryTask = response.data;
-  
-     await axios.delete(`${url}/${taskId}`);
+     const newHistoryTask = await moveTaskToHistoryApi({url, taskId, task: moveTask});
   
      setTaskHistory(prev => [...prev, newHistoryTask]);
      setTasks(prev => prev.filter((task: Task) => task.id !== taskId));

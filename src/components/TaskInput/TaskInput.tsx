@@ -53,20 +53,19 @@ function TaskInput({ fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }:
 
  return(
   <div className="input-container">
-   <input type="text" className="search-input" 
-     name="newTask" onChange={typeInput} onKeyDown={handleEscapeButton} 
-     value={addTask}
-     placeholder="Add new task here"/>
-   <button className="add-button" onClick={() => addTaskButton('today')}>
-     Add to today
-   </button>
-   <button className="add-button" onClick={() => addTaskButton('tomorrow')}>
-     Add to tomorrow
-   </button>
-   <button className="add-button" onClick={() => addTaskButton('twoDaysAfter')}>
-     Add in two days
-   </button>
-</div>
+    <input type="text" className="search-input" 
+      name="newTask" onChange={typeInput} onKeyDown={handleEscapeButton} 
+      value={addTask} placeholder="Add new task here"/>
+    <button className="add-button" onClick={() => addTaskButton('today')}>
+      Add to today
+    </button>
+    <button className="add-button" onClick={() => addTaskButton('tomorrow')}>
+      Add to tomorrow
+    </button>
+    <button className="add-button" onClick={() => addTaskButton('twoDaysAfter')}>
+      Add in two days
+    </button>
+  </div>
  )
 }
 
