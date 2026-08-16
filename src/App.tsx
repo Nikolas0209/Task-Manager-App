@@ -6,7 +6,6 @@ import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import type { Task } from './types/taskType';
 
-
 function App(){
   const [tasksToday, setTasksToday] = useState <Task[]>([]);
   const [tasksTomorrow, setTasksTomorrow] = useState <Task[]>([]);
