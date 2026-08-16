@@ -8,6 +8,7 @@ import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/To
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
 import type { Task } from '../types/taskType';
 import type { TaskStatusType } from '../types/taskStatusType';
+import type { TaskSource } from '../hooks/useTaskHistory';
 
 type HomePageTask = {
   tasksToday: Task[];
@@ -16,11 +17,7 @@ type HomePageTask = {
   fetchTasksToday: () => Promise<void>;
   fetchTasksTomorrow: () => Promise<void>;
   fetchTasksInTwoDays: () => Promise<void>;
-  moveTaskToHistory: {
-    today: (task: string) => Promise<void>,
-    tomorrow: (task: string) => Promise<void>,
-    twoDaysAfter: (task: string) => Promise<void>
-  };
+  moveTaskToHistory: (taskId: string, source: TaskSource) => Promise<void>
   isLoading: boolean;
 };
 
@@ -31,8 +28,6 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
   
-  const {today, tomorrow, twoDaysAfter} = moveTaskToHistory;
-
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
   } 
@@ -97,7 +92,7 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksToday={tasksToday} 
-             fetchTasksToday={fetchTasksToday} moveTaskToHistory={today} 
+             fetchTasksToday={fetchTasksToday} moveTaskToHistory={moveTaskToHistory} 
              isLoading={isLoading} />
         </div>
       
@@ -105,7 +100,7 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
           <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 
-             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={tomorrow} 
+             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={moveTaskToHistory} 
              isLoading={isLoading} />
         </div>
 
@@ -113,7 +108,7 @@ function HomePage({ tasksToday, tasksTomorrow, tasksInTwoDays, fetchTasksToday, 
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
              unmarkedTask={unmarkedTask} tasksInTwoDays={tasksInTwoDays} 
-             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={twoDaysAfter}
+             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={moveTaskToHistory}
              isLoading={isLoading} />
         </div>
 

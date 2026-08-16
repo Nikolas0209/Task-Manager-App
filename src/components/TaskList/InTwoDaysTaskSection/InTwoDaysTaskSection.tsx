@@ -2,6 +2,7 @@ import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import type {TaskStatusType } from "../../../types/taskStatusType";
 import type { Task } from '../../../types/taskType';
 import InTwoDaysTaskList from './InTwoDaysTaskList';
+import type { TaskSource } from "../../../hooks/useTaskHistory";
 
 type InTwoDaysTaskSections = {
   tasksInTwoDays: Task[];
@@ -12,7 +13,7 @@ type InTwoDaysTaskSections = {
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   taskStatus: Record<string, TaskStatusType>;
-  moveTaskToHistory: (taskId: string) => void;
+  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean;
 }
 

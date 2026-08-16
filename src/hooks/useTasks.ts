@@ -3,7 +3,7 @@ import type { Task } from "../types/taskType";
 import axios from "axios";
 
 export function useTasks(url: string){
-  const [task, setTask] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const fetchTasks = useCallback (async() => {
    try{
@@ -13,7 +13,7 @@ export function useTasks(url: string){
       ...task,
       localId: crypto.randomUUID()
     }))
-    setTask(tasksWithLocalId);
+    setTasks(tasksWithLocalId);
 
    }catch(error){
     console.log('Could not fetch the data', error)
@@ -24,5 +24,5 @@ export function useTasks(url: string){
     fetchTasks()
   }, [fetchTasks]);
 
-  return {task, setTask, fetchTasks}
+  return {tasks, setTasks, fetchTasks}
 }

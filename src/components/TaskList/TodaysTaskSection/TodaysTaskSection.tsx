@@ -2,6 +2,7 @@ import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import type { TaskStatusType } from "../../../types/taskStatusType";
 import type { Task } from '../../../types/taskType';
 import TodaysTaskList from "./TodaysTaskList";
+import type { TaskSource } from "../../../hooks/useTaskHistory";
 
 type TaskSections = {
  taskDetails: string | null;
@@ -11,7 +12,7 @@ type TaskSections = {
  markedTask: (status: string) => void;
  unmarkedTask: (status: string) => void;
  fetchTasksToday: () => Promise<void>;
- moveTaskToHistory: (taskId: string) => void;
+ moveTaskToHistory: (taskId: string, source: TaskSource) => Promise<void>;
  isLoading: boolean;
  tasksToday: Task[];
 };

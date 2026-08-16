@@ -2,6 +2,7 @@ import '../TaskList.css';
 import type { Task } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
+import type { TaskSource } from '../../../hooks/useTaskHistory';
 
 type TaskTomorrow = {
   task: Task;
@@ -13,7 +14,7 @@ type TaskTomorrow = {
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   status: string;
-  moveTaskToHistory: (taskId: string) => void;
+  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean
 }
 
@@ -54,7 +55,7 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
 
     {isOpen && (
       <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} markedTask={markedTask} 
-       unmarkedTask={unmarkedTask} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
+       unmarkedTask={unmarkedTask} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} source='tomorrow'/>
      )
     }
    </li> 

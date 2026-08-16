@@ -2,6 +2,7 @@ import '../TaskList.css';
 import type { Task } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
+import type { TaskSource } from '../../../hooks/useTaskHistory';
 
 type TaskToday = {
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
@@ -11,7 +12,7 @@ type TaskToday = {
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
   status: string;
-  moveTaskToHistory: (taskId: string) => void;
+  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean;
   columnClass?: string;
   task: Task;
@@ -52,7 +53,7 @@ function TodaysTaskList({task, fetchTasksToday, setTaskDetails, isOpen, toggleTa
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} unmarkedTask={unmarkedTask} 
+      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} unmarkedTask={unmarkedTask} source='today'
         markedTask={markedTask} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} columnClass={columnClass} />
       )
     }

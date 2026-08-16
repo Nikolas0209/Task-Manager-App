@@ -4,6 +4,7 @@ import type { Task } from '../../types/taskType';
 import undo from '../../assets/undo.png';
 import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';
+import type { TaskSource } from '../../hooks/useTaskHistory';
  
 type TaskDetails = {
   task: Task;
@@ -11,13 +12,14 @@ type TaskDetails = {
   markTask: (status: string) => void;
   markedTask: (status: string) => void;
   unmarkedTask: (status: string) => void;
-  moveTaskToHistory: (taskId: string) => void;
+  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean;
   columnClass?: string;
+  source: TaskSource;
 }
 
 function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
-  moveTaskToHistory, isLoading, columnClass }: TaskDetails){ 
+  moveTaskToHistory, isLoading, columnClass, source }: TaskDetails){ 
   
  return(
    <div className={`task-details ${columnClass || ''}`}>
@@ -43,7 +45,7 @@ function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
          </button>
        </div>
        <div className="move-to-history-container">
-        <button className="move-to-history-button" disabled={isLoading} onClick={() => moveTaskToHistory(task.id)}>
+        <button className="move-to-history-button" disabled={isLoading} onClick={() => moveTaskToHistory(task.id, source)}>
           Move to History
         </button>
        </div>
