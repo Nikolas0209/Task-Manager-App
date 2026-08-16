@@ -1,6 +1,7 @@
 import './TaskInput.css';
 import { useState } from 'react';
 import axios from 'axios';
+import type { TaskSource } from '../../types/taskType';
 
 type InputSection = {
   fetchTasksToday: () => Promise<void>;
@@ -11,56 +12,36 @@ type InputSection = {
 function TaskInput({ fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }: InputSection ){
   const [addTask, setAddTask] = useState <string>('');
 
-  const addTodaysTask = async(): Promise<void> => {
+  const addTaskButton = async( source: TaskSource): Promise<void> => {
+    let url: string;
+    let fetchTasks: () => Promise<void>;
+    
     try{
       if(!addTask) return;
 
-      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks', {
+      if(source === 'today'){
+        url = 'https://692488a63ad095fb8474968f.mockapi.io/tasks';
+        fetchTasks = fetchTasksToday;
+      } else if(source === 'tomorrow'){
+        url = 'https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow';
+        fetchTasks = fetchTasksTomorrow;
+      } else{
+        url = 'https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days';
+        fetchTasks = fetchTasksInTwoDays;
+      }
+
+      await axios.post(url, {
         task: addTask,
         createdAt: new Date().toISOString()
       });
 
       setAddTask('');
-      await fetchTasksToday();
+      await fetchTasks();
     } 
     catch(error){
       console.log('Could not add a task. Please try again later.', error);
     }
-  };
-
-  const addTomorrowsTask = async(): Promise<void> => {
-    try{
-      if(!addTask) return;
-
-      await axios.post('https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow', {
-        task: addTask,
-        createdAt: new Date().toISOString()
-      });
-
-      setAddTask('');
-      await fetchTasksTomorrow();
-    }
-    catch(error){
-      console.log('Could not add a task. Please try again later.', error);
-    }
-  };
-
-  const addInTwoDaysTask = async(): Promise<void> => {
-    try{
-      if(!addTask) return;
-
-      await axios.post('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days', {
-        task: addTask,
-        createdAt: new Date().toISOString()
-      });
-
-      setAddTask('');
-      await fetchTasksInTwoDays();
-    }
-    catch(error){
-      console.log('Could not add a task. Please try again later.', error);
-    }
-  };
+  }
 
   const typeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setAddTask(event.target.value);
@@ -76,13 +57,13 @@ function TaskInput({ fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }:
      name="newTask" onChange={typeInput} onKeyDown={handleEscapeButton} 
      value={addTask}
      placeholder="Add new task here"/>
-   <button className="add-button" onClick={addTodaysTask}>
+   <button className="add-button" onClick={() => addTaskButton('today')}>
      Add to today
    </button>
-   <button className="add-button" onClick={addTomorrowsTask}>
+   <button className="add-button" onClick={() => addTaskButton('tomorrow')}>
      Add to tomorrow
    </button>
-   <button className="add-button" onClick={addInTwoDaysTask}>
+   <button className="add-button" onClick={() => addTaskButton('twoDaysAfter')}>
      Add in two days
    </button>
 </div>
