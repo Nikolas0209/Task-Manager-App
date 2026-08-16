@@ -4,9 +4,7 @@ import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 
 type TaskToday = {
-  task: Task;
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
-  fetchTasksToday: () => Promise<void>;
   isOpen: boolean;
   toggleTaskDetails: () => void;
   markTask: (status: string) => void;
@@ -16,11 +14,13 @@ type TaskToday = {
   moveTaskToHistory: (taskId: string) => void;
   isLoading: boolean;
   columnClass?: string;
+  task: Task;
+  fetchTasksToday: () => Promise<void>
 };
 
-function TodaysTaskList({ task, setTaskDetails, fetchTasksToday, isOpen, toggleTaskDetails, markTask, 
+function TodaysTaskList({task, fetchTasksToday, setTaskDetails, isOpen, toggleTaskDetails, markTask, 
   markedTask, unmarkedTask, status, moveTaskToHistory, isLoading, columnClass }: TaskToday){
-
+  
   const deleteTask = async(): Promise<void> => {
     try{
      await axios.delete(`https://692488a63ad095fb8474968f.mockapi.io/tasks/${task.id}`);

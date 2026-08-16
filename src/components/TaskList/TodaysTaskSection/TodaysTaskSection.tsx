@@ -10,10 +10,10 @@ type TaskSections = {
  markTask: (status: string) => void;
  markedTask: (status: string) => void;
  unmarkedTask: (status: string) => void;
- tasksToday: Task[];
  fetchTasksToday: () => Promise<void>;
  moveTaskToHistory: (taskId: string) => void;
  isLoading: boolean;
+ tasksToday: Task[];
 };
 
 function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, markedTask, unmarkedTask, tasksToday, fetchTasksToday, moveTaskToHistory, isLoading }: TaskSections ){
