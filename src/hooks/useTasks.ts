@@ -8,7 +8,13 @@ export function useTasks(url: string){
   const fetchTasks = useCallback (async() => {
    try{
     const response = await axios.get<Task[]>(url);
-    setTask(response.data);
+
+    const tasksWithLocalId = response.data.map(task => ({
+      ...task,
+      localId: crypto.randomUUID()
+    }))
+    setTask(tasksWithLocalId);
+
    }catch(error){
     console.log('Could not fetch the data', error)
    }
@@ -18,5 +24,5 @@ export function useTasks(url: string){
     fetchTasks()
   }, [fetchTasks]);
 
-  return {task, fetchTasks}
+  return {task, setTask, fetchTasks}
 }
