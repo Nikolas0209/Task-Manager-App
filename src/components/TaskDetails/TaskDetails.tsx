@@ -1,10 +1,9 @@
 import './TaskDetails.css';
 import bin from '../../assets/bin.png';
-import type { Task } from '../../types/taskType';
+import type { Task, TaskSource } from '../../types/taskType';
 import undo from '../../assets/undo.png';
 import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';
-import type { TaskSource } from '../../hooks/useTaskHistory';
  
 type TaskDetails = {
   task: Task;

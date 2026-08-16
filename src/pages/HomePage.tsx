@@ -6,9 +6,9 @@ import TaskInput from '../components/TaskInput/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
-import type { Task } from '../types/taskType';
+import type { Task, TaskSource } from '../types/taskType';
 import type { TaskStatusType } from '../types/taskStatusType';
-import type { TaskSource } from '../hooks/useTaskHistory';
+
 
 type HomePageTask = {
   tasksToday: Task[];

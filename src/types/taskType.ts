@@ -5,3 +5,5 @@ export type Task = {
   id: string;
   localId: string;
 }
+
+export type TaskSource = 'today' | 'tomorrow' | 'twoDaysAfter';

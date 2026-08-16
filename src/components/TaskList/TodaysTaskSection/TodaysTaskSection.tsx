@@ -1,8 +1,7 @@
 import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import type { TaskStatusType } from "../../../types/taskStatusType";
-import type { Task } from '../../../types/taskType';
+import type { Task, TaskSource } from '../../../types/taskType';
 import TodaysTaskList from "./TodaysTaskList";
-import type { TaskSource } from "../../../hooks/useTaskHistory";
 
 type TaskSections = {
  taskDetails: string | null;

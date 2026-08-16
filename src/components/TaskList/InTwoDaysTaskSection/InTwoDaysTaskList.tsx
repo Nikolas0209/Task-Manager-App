@@ -1,8 +1,7 @@
-import type { Task } from '../../../types/taskType';
+import type { Task, TaskSource } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import '../TaskList.css';
-import type { TaskSource } from '../../../hooks/useTaskHistory';
 
 type TaskInTwoDays = {
   isOpen: boolean;

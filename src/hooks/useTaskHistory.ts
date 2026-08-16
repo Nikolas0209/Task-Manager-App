@@ -1,8 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
-import type { Task } from "../types/taskType";
+import type { Task, TaskSource } from "../types/taskType";
 import axios from "axios";
-
-export type TaskSource = 'today' | 'tomorrow' | 'twoDaysAfter';
 
 type TaskType = {
   tasksToday: Task[];

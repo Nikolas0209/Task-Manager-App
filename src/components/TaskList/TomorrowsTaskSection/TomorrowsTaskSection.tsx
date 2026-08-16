@@ -1,8 +1,7 @@
 import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import TomorrowsTaskList from "./TomorrowsTaskList";
 import type { TaskStatusType } from '../../../types/taskStatusType';
-import type { Task } from '../../../types/taskType';
-import type { TaskSource } from "../../../hooks/useTaskHistory";
+import type { Task, TaskSource } from '../../../types/taskType';
  
 type TodaysTaskSections = {
  tasksTomorrow: Task[];
