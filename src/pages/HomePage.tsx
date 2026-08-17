@@ -6,9 +6,7 @@ import TaskInput from '../components/TaskInput/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
-import type {TaskSource } from '../types/taskType';
 import type { TaskStatusType } from '../types/taskStatusType';
-import { moveTaskHistory } from '../utils/moveTaskHistory';
 import { useTaskContext } from '../context/useTaskContext';
 
 function HomePage(){
@@ -16,18 +14,12 @@ function HomePage(){
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
-  const [isLoading, setIsLoading] = useState <boolean>(false);
 
-  const{
-    tasksToday: { tasks: tasksToday, setTasks: setTasksToday },
-    tasksTomorrow: { tasks: tasksTomorrow, setTasks: setTasksTomorrow },
-    tasksInTwoDays: { tasks: tasksInTwoDays, setTasks: setTasksInTwoDays }
+  const {
+    tasksToday: { tasks: tasksToday },
+    tasksTomorrow: { tasks: tasksTomorrow },
+    tasksInTwoDays: { tasks: tasksInTwoDays }
   } = useTaskContext();
-
-  const handleMoveTaskToHistory = (taskId: string, source: TaskSource): Promise<void> => {
-    return moveTaskHistory({ taskId, source, tasksToday, tasksTomorrow, tasksInTwoDays, setTasksToday,
-       setTasksTomorrow, setTasksInTwoDays, setIsLoading });
-  };
 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -82,20 +74,17 @@ function HomePage(){
 
         <div className="task-manager-card">
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} tasksToday={tasksToday} 
-             moveTaskToHistory={handleMoveTaskToHistory} isLoading={isLoading} />
+             setTaskDetails={setTaskDetails} markTask={markTask} tasksToday={tasksToday} />
         </div>
       
         <div className="task-manager-card task-manager-card-tomorrow">
           <TomorrowsTaskSection taskDetails={taskDetails} setTaskDetails={setTaskDetails} 
-             taskStatus={taskStatus} markTask={markTask} tasksTomorrow={tasksTomorrow} 
-             moveTaskToHistory={handleMoveTaskToHistory} isLoading={isLoading} />
+             taskStatus={taskStatus} markTask={markTask} tasksTomorrow={tasksTomorrow} />
         </div>
 
         <div className="task-manager-card">
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} tasksInTwoDays={tasksInTwoDays}
-             moveTaskToHistory={handleMoveTaskToHistory} isLoading={isLoading} />
+             setTaskDetails={setTaskDetails} markTask={markTask} tasksInTwoDays={tasksInTwoDays} />
         </div>
 
       </div>

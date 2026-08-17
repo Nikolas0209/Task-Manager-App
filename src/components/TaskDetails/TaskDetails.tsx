@@ -1,6 +1,6 @@
 import './TaskDetails.css';
 import bin from '../../assets/bin.png';
-import type { Task, TaskSource } from '../../types/taskType';
+import type { Task } from '../../types/taskType';
 import undo from '../../assets/undo.png';
 import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';
@@ -10,15 +10,13 @@ type TaskDetails = {
   task: Task;
   onDelete: () => Promise<void>;
   markTask: (id:string, status: TaskStatusType) => void;
-  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean;
   columnClass?: string;
-  source: TaskSource;
+  handleMoveTaskToHistory: () => Promise<void>;
 }
 
-function TaskDetails({ task, onDelete, markTask, 
-  moveTaskToHistory, isLoading, columnClass, source }: TaskDetails){ 
-   
+function TaskDetails({ task, onDelete, markTask, isLoading, columnClass, handleMoveTaskToHistory }: TaskDetails){ 
+ 
  return(
    <div className={`task-details ${columnClass || ''}`}>
      <div className="task-state-container">
@@ -43,7 +41,7 @@ function TaskDetails({ task, onDelete, markTask,
          </button>
        </div>
        <div className="move-to-history-container">
-        <button className="move-to-history-button" disabled={isLoading} onClick={() => moveTaskToHistory(task.id, source)}>
+        <button className="move-to-history-button" disabled={isLoading} onClick={handleMoveTaskToHistory}>
           Move to History
         </button>
        </div>

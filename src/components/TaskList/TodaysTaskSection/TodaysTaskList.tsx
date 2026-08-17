@@ -1,9 +1,11 @@
 import '../TaskList.css';
-import type { Task, TaskSource } from '../../../types/taskType';
+import type { Task } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import type { TaskStatusType } from '../../../types/taskStatusType';
 import { useTaskContext } from '../../../context/useTaskContext';
+import { moveTaskHistory } from '../../../utils/moveTaskHistory';
+import { useState } from 'react';
 
 type TaskToday = {
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
@@ -11,17 +13,19 @@ type TaskToday = {
   toggleTaskDetails: () => void;
   markTask: (id: string, status: TaskStatusType) => void;
   status: string;
-  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
-  isLoading: boolean;
   columnClass?: string;
   task: Task;
 };
 
 function TodaysTaskList({task, setTaskDetails, isOpen, toggleTaskDetails, markTask, 
-  status, moveTaskToHistory, isLoading, columnClass }: TaskToday){
-
+  status, columnClass }: TaskToday){
+  const [isLoading, setIsLoading] = useState <boolean>(false);  
   const { tasksToday } = useTaskContext();
-  const { fetchTasks: fetchTasksToday } = tasksToday;
+  const { fetchTasks: fetchTasksToday, setTasks: setTasksToday } = tasksToday;
+
+  const handleMoveTaskToHistory = () => {
+    return moveTaskHistory({ taskId: task.id, source: 'today', task, setTasks: setTasksToday, setIsLoading });
+   }
   
   const deleteTask = async(): Promise<void> => {
     try{
@@ -54,8 +58,8 @@ function TodaysTaskList({task, setTaskDetails, isOpen, toggleTaskDetails, markTa
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} source='today'
-       moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} columnClass={columnClass} />
+      <TaskDetails task={task} onDelete={deleteTask} markTask={markTask} isLoading={isLoading}
+        columnClass={columnClass} handleMoveTaskToHistory={handleMoveTaskToHistory} />
       )
     }
    </li> 

@@ -1,7 +1,7 @@
 import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import TomorrowsTaskList from "./TomorrowsTaskList";
 import type { TaskStatusType } from '../../../types/taskStatusType';
-import type { Task, TaskSource } from '../../../types/taskType';
+import type { Task } from '../../../types/taskType';
  
 type TodaysTaskSections = {
  tasksTomorrow: Task[];
@@ -9,11 +9,9 @@ type TodaysTaskSections = {
  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
  taskStatus: Record<string, TaskStatusType>;
  markTask: (id:string, status: TaskStatusType) => void;
- moveTaskToHistory: (taskId: string, source: TaskSource) => void;
- isLoading: boolean
 }
 
-function TomorrowsTaskSection({taskDetails, setTaskDetails, tasksTomorrow, taskStatus, markTask,  moveTaskToHistory, isLoading }: TodaysTaskSections ){
+function TomorrowsTaskSection({taskDetails, setTaskDetails, tasksTomorrow, taskStatus, markTask }: TodaysTaskSections ){
   
   return(
     <>
@@ -31,8 +29,7 @@ function TomorrowsTaskSection({taskDetails, setTaskDetails, tasksTomorrow, taskS
            return(
              <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 
                toggleTaskDetails={toggleTaskDetails} setTaskDetails={setTaskDetails} 
-               markTask={markTask} status={status} moveTaskToHistory={moveTaskToHistory} 
-               isLoading={isLoading} />
+               markTask={markTask} status={status} />
             )
            })
           }

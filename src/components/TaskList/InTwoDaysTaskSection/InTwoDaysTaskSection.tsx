@@ -1,6 +1,6 @@
 import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import type {TaskStatusType } from "../../../types/taskStatusType";
-import type { Task, TaskSource } from '../../../types/taskType';
+import type { Task } from '../../../types/taskType';
 import InTwoDaysTaskList from './InTwoDaysTaskList';
 
 type InTwoDaysTaskSections = {
@@ -9,11 +9,9 @@ type InTwoDaysTaskSections = {
   taskDetails: string | null;
   markTask: (id:string, status: TaskStatusType) => void;
   taskStatus: Record<string, TaskStatusType>;
-  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
-  isLoading: boolean;
 }
 
-function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, tasksInTwoDays, moveTaskToHistory, isLoading }: InTwoDaysTaskSections){
+function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, tasksInTwoDays }: InTwoDaysTaskSections){
 
   return(
     <>
@@ -30,8 +28,7 @@ function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTas
                 
            return(
              <InTwoDaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-               task={task} setTaskDetails={setTaskDetails} markTask={markTask} status={status} 
-               moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
+               task={task} setTaskDetails={setTaskDetails} markTask={markTask} status={status} />
             )
           })}
         </ul>

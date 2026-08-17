@@ -1,9 +1,11 @@
 import '../TaskList.css';
-import type { Task, TaskSource } from '../../../types/taskType';
+import type { Task } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import type { TaskStatusType } from '../../../types/taskStatusType';
 import { useTaskContext } from '../../../context/useTaskContext';
+import { useState } from 'react';
+import { moveTaskHistory } from '../../../utils/moveTaskHistory';
 
 type TaskTomorrow = {
   task: Task;
@@ -12,15 +14,17 @@ type TaskTomorrow = {
   toggleTaskDetails: () => void;
   markTask: (id:string, status: TaskStatusType) => void;
   status: string;
-  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
-  isLoading: boolean;
 }
 
 function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails,  
-  markTask, status, moveTaskToHistory, isLoading }: TaskTomorrow){
-
+  markTask, status }: TaskTomorrow){
+  const [isLoading, setIsLoading] = useState <boolean>(false);
   const { tasksTomorrow } = useTaskContext();
-  const { fetchTasks: fetchTasksTomorrow } = tasksTomorrow;
+  const { fetchTasks: fetchTasksTomorrow, setTasks: setTasksTomorrow } = tasksTomorrow;
+
+  const handleMoveTaskToHistory = () => {
+    return moveTaskHistory({ taskId: task.id, source: 'tomorrow', task, setTasks: setTasksTomorrow, setIsLoading });
+   }
 
   const deleteTaskTomorrow = async (): Promise<void>  => {
     try{
@@ -56,7 +60,7 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails,
 
     {isOpen && (
       <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} 
-        moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} source='tomorrow'/>
+        handleMoveTaskToHistory={handleMoveTaskToHistory} isLoading={isLoading} />
      )
     }
    </li> 
