@@ -7,19 +7,12 @@ import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTa
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
 import type { TaskStatusType } from '../types/taskStatusType';
-import { useTaskContext } from '../context/useTaskContext';
 
 function HomePage(){
   const navigate = useNavigate(); 
   const [isInstructions, setIsInstructions] = useState<boolean>(false);
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
-
-  const {
-    tasksToday: { tasks: tasksToday },
-    tasksTomorrow: { tasks: tasksTomorrow },
-    tasksInTwoDays: { tasks: tasksInTwoDays }
-  } = useTaskContext();
 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -74,17 +67,17 @@ function HomePage(){
 
         <div className="task-manager-card">
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} tasksToday={tasksToday} />
+             setTaskDetails={setTaskDetails} markTask={markTask}/>
         </div>
       
         <div className="task-manager-card task-manager-card-tomorrow">
           <TomorrowsTaskSection taskDetails={taskDetails} setTaskDetails={setTaskDetails} 
-             taskStatus={taskStatus} markTask={markTask} tasksTomorrow={tasksTomorrow} />
+             taskStatus={taskStatus} markTask={markTask} />
         </div>
 
         <div className="task-manager-card">
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} tasksInTwoDays={tasksInTwoDays} />
+             setTaskDetails={setTaskDetails} markTask={markTask}  />
         </div>
 
       </div>
