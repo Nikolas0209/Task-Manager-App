@@ -19,7 +19,7 @@ type TaskDetails = {
 
 function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
   moveTaskToHistory, isLoading, columnClass, source }: TaskDetails){ 
-  
+   
  return(
    <div className={`task-details ${columnClass || ''}`}>
      <div className="task-state-container">

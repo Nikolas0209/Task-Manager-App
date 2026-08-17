@@ -1,16 +1,13 @@
 import './TaskHistory.css';
 import { useNavigate } from 'react-router-dom';
-import type { Task } from '../types/taskType';
 import EmptyTaskHistory from '../components/EmptyTaskHistory/EmptyTaskHistory';
+import { useTaskHistory } from '../hooks/useTaskHistory';
+import { useState } from 'react';
 
-type TaskHistory = {
-  taskHistory: Task[];
-  deleteHistoryTask: (taskId: string) => Promise<void>;
-  isLoading: boolean
-}
-
-function TaskHistory({ taskHistory, deleteHistoryTask, isLoading }: TaskHistory ){
+function TaskHistory(){
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { taskHistory, deleteHistoryTask } = useTaskHistory({ setIsLoading });
  
   const goBack = (): void => {
    navigate('/');
