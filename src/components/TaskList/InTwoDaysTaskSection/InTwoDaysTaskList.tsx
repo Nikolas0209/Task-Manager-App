@@ -2,6 +2,7 @@ import type { Task, TaskSource } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import '../TaskList.css';
+import type { TaskStatusType } from '../../../types/taskStatusType';
 
 type TaskInTwoDays = {
   isOpen: boolean;
@@ -9,16 +10,14 @@ type TaskInTwoDays = {
   task: Task;
   fetchTasksInTwoDays: () => Promise<void>;
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
-  markTask: (status: string) => void;
-  markedTask: (status: string) => void;
-  unmarkedTask: (status: string) => void;
+  markTask: (id: string, status: TaskStatusType) => void;
   status: string;
   moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean
 }
 
 function InTwoDaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksInTwoDays,
- setTaskDetails, markTask, markedTask, unmarkedTask, status, moveTaskToHistory, isLoading }: TaskInTwoDays) {
+ setTaskDetails, markTask, status, moveTaskToHistory, isLoading }: TaskInTwoDays) {
 
  const deleteTaskInTwoDays = async(): Promise<void> => {
   try{
@@ -52,8 +51,8 @@ function InTwoDaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksInTwoDay
   
      </div>
      {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTaskInTwoDays} markTask={markTask} markedTask={markedTask}
-       unmarkedTask={unmarkedTask} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} source='twoDaysAfter' />
+      <TaskDetails task={task} onDelete={deleteTaskInTwoDays} markTask={markTask} 
+       moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} source='twoDaysAfter' />
       )
      }
    </li>              

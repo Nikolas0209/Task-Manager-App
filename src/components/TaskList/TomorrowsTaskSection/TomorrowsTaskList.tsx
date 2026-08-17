@@ -2,6 +2,7 @@ import '../TaskList.css';
 import type { Task, TaskSource } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
+import type { TaskStatusType } from '../../../types/taskStatusType';
 
 type TaskTomorrow = {
   task: Task;
@@ -9,16 +10,14 @@ type TaskTomorrow = {
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
   toggleTaskDetails: () => void;
   fetchTasksTomorrow: () => Promise<void>;
-  markTask: (status: string) => void;
-  markedTask: (status: string) => void;
-  unmarkedTask: (status: string) => void;
+  markTask: (id:string, status: TaskStatusType) => void;
   status: string;
   moveTaskToHistory: (taskId: string, source: TaskSource) => void;
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fetchTasksTomorrow, 
-   markTask, markedTask, unmarkedTask, status, moveTaskToHistory, isLoading }: TaskTomorrow){
+   markTask, status, moveTaskToHistory, isLoading }: TaskTomorrow){
 
   const deleteTaskTomorrow = async (): Promise<void>  => {
     try{
@@ -53,8 +52,8 @@ function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails, fe
     </div>
 
     {isOpen && (
-      <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} markedTask={markedTask} 
-       unmarkedTask={unmarkedTask} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} source='tomorrow'/>
+      <TaskDetails task={task} onDelete={deleteTaskTomorrow} markTask={markTask} 
+        moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} source='tomorrow'/>
      )
     }
    </li> 

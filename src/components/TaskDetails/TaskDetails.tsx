@@ -4,20 +4,19 @@ import type { Task, TaskSource } from '../../types/taskType';
 import undo from '../../assets/undo.png';
 import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';
+import type { TaskStatusType } from '../../types/taskStatusType';
  
 type TaskDetails = {
   task: Task;
   onDelete: () => Promise<void>;
-  markTask: (status: string) => void;
-  markedTask: (status: string) => void;
-  unmarkedTask: (status: string) => void;
+  markTask: (id:string, status: TaskStatusType) => void;
   moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean;
   columnClass?: string;
   source: TaskSource;
 }
 
-function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
+function TaskDetails({ task, onDelete, markTask, 
   moveTaskToHistory, isLoading, columnClass, source }: TaskDetails){ 
    
  return(
@@ -25,13 +24,13 @@ function TaskDetails({ task, onDelete, markTask, markedTask, unmarkedTask,
      <div className="task-state-container">
        Select status:
        <div>
-         <button className="status-update-button" onClick={() => markTask(task.localId)}>
+         <button className="status-update-button" onClick={() => markTask(task.localId, 'not marked')}>
            <img className="status-button-image" src={undo} />
          </button>
-         <button className="status-update-button" onClick={() => markedTask(task.localId)}>
+         <button className="status-update-button" onClick={() => markTask(task.localId, 'marked')}>
            <img className="status-button-image" src={checkedTask} />
          </button>
-         <button className="status-update-button" onClick={() => unmarkedTask(task.localId)}>
+         <button className="status-update-button" onClick={() => markTask(task.localId, 'unmarked')}>
            <img className="status-button-image" src={uncheckedTask} />
          </button>
        </div>

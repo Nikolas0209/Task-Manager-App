@@ -48,17 +48,9 @@ function HomePage({ moveTaskToHistory, isLoading, tasksToday, tasksTomorrow, tas
 
   }, [isInstructions])
 
-  const markTask = (id: string): void => {
-    setTaskStatus(prev => ({ ...prev, [id]: 'not marked' }));
-   }; 
-
-   const markedTask = (id: string): void => {
-    setTaskStatus(prev => ({ ...prev, [id]: 'marked' }));
-   };
-
-   const unmarkedTask = (id: string): void => {
-    setTaskStatus(prev => ({ ...prev, [id]: 'unmarked' }));
-   };
+  const markTask = (id: string, status: TaskStatusType) => {
+    setTaskStatus(prev => ({...prev, [id]: status}));
+  }
 
   return(
     <>
@@ -89,24 +81,21 @@ function HomePage({ moveTaskToHistory, isLoading, tasksToday, tasksTomorrow, tas
 
         <div className="task-manager-card">
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
-             unmarkedTask={unmarkedTask} tasksToday={tasksToday} 
+             setTaskDetails={setTaskDetails} markTask={markTask} tasksToday={tasksToday} 
              fetchTasksToday={fetchTasksToday} moveTaskToHistory={moveTaskToHistory} 
              isLoading={isLoading} />
         </div>
       
         <div className="task-manager-card task-manager-card-tomorrow">
           <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
-             unmarkedTask={unmarkedTask} tasksTomorrow={tasksTomorrow} 
+             setTaskDetails={setTaskDetails} markTask={markTask} tasksTomorrow={tasksTomorrow} 
              fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={moveTaskToHistory} 
              isLoading={isLoading} />
         </div>
 
         <div className="task-manager-card">
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask} 
-             unmarkedTask={unmarkedTask} tasksInTwoDays={tasksInTwoDays} 
+             setTaskDetails={setTaskDetails} markTask={markTask} tasksInTwoDays={tasksInTwoDays}
              fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={moveTaskToHistory}
              isLoading={isLoading} />
         </div>

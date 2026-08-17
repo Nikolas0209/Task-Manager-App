@@ -8,15 +8,13 @@ type TodaysTaskSections = {
  taskDetails: string | null;
  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
  taskStatus: Record<string, TaskStatusType>;
- markTask: (status: string) => void;
- markedTask: (status: string) => void;
- unmarkedTask: (status: string) => void;
+ markTask: (id:string, status: TaskStatusType) => void;
  fetchTasksTomorrow: () => Promise<void>;
  moveTaskToHistory: (taskId: string, source: TaskSource) => void;
  isLoading: boolean
 }
 
-function TomorrowsTaskSection({ tasksTomorrow, taskDetails, setTaskDetails, taskStatus, fetchTasksTomorrow, markTask, markedTask, unmarkedTask, moveTaskToHistory, isLoading }: TodaysTaskSections ){
+function TomorrowsTaskSection({ tasksTomorrow, taskDetails, setTaskDetails, taskStatus, fetchTasksTomorrow, markTask,  moveTaskToHistory, isLoading }: TodaysTaskSections ){
 
   return(
     <>
@@ -34,8 +32,7 @@ function TomorrowsTaskSection({ tasksTomorrow, taskDetails, setTaskDetails, task
            return(
              <TomorrowsTaskList task={task} key={task.id} isOpen={isOpen} 
                toggleTaskDetails={toggleTaskDetails} fetchTasksTomorrow={fetchTasksTomorrow} 
-               setTaskDetails={setTaskDetails} markTask={markTask} markedTask={markedTask}
-               unmarkedTask={unmarkedTask} status={status}
+               setTaskDetails={setTaskDetails} markTask={markTask} status={status}
                moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
             )
            })

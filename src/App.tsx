@@ -16,7 +16,7 @@ function App(){
   const { tasks: tasksInTwoDays, setTasks: setTasksInTwoDays, fetchTasks: fetchTasksInTwoDays } = 
    useTasks('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days');
 
-  const moveTaskToHistory = async(taskId: string, source:TaskSource): Promise<void> => {
+  const moveTaskToHistory = async(taskId: string, source: TaskSource): Promise<void> => {
     let tasks: Task[];
     let setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
     let url: string;
