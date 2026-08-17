@@ -3,6 +3,7 @@ import type { Task, TaskSource } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import type { TaskStatusType } from '../../../types/taskStatusType';
+import { useTaskContext } from '../../../context/useTaskContext';
 
 type TaskToday = {
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null >>;
@@ -14,11 +15,13 @@ type TaskToday = {
   isLoading: boolean;
   columnClass?: string;
   task: Task;
-  fetchTasksToday: () => Promise<void>
 };
 
-function TodaysTaskList({task, fetchTasksToday, setTaskDetails, isOpen, toggleTaskDetails, markTask, 
+function TodaysTaskList({task, setTaskDetails, isOpen, toggleTaskDetails, markTask, 
   status, moveTaskToHistory, isLoading, columnClass }: TaskToday){
+
+  const { tasksToday } = useTaskContext();
+  const { fetchTasks: fetchTasksToday } = tasksToday;
   
   const deleteTask = async(): Promise<void> => {
     try{

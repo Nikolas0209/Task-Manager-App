@@ -2,15 +2,14 @@ import './TaskInput.css';
 import { useState } from 'react';
 import axios from 'axios';
 import type { TaskSource } from '../../types/taskType';
+import { useTaskContext } from '../../context/useTaskContext';
 
-type InputSection = {
-  fetchTasksToday: () => Promise<void>;
-  fetchTasksTomorrow: () => Promise<void>;
-  fetchTasksInTwoDays: () => Promise<void>;
-};
-
-function TaskInput({ fetchTasksToday, fetchTasksTomorrow, fetchTasksInTwoDays }: InputSection ){
+function TaskInput(){
   const [addTask, setAddTask] = useState <string>('');
+  const { tasksToday, tasksTomorrow, tasksInTwoDays } = useTaskContext();
+  const { fetchTasks: fetchTasksToday } = tasksToday;
+  const { fetchTasks: fetchTasksTomorrow } = tasksTomorrow;
+  const { fetchTasks: fetchTasksInTwoDays } = tasksInTwoDays;
 
   const addTaskButton = async( source: TaskSource): Promise<void> => {
     let url: string;

@@ -3,12 +3,12 @@ import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
 import '../TaskList.css';
 import type { TaskStatusType } from '../../../types/taskStatusType';
+import { useTaskContext } from '../../../context/useTaskContext';
 
 type TaskInTwoDays = {
   isOpen: boolean;
   toggleTaskDetails: () => void;
   task: Task;
-  fetchTasksInTwoDays: () => Promise<void>;
   setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
   markTask: (id: string, status: TaskStatusType) => void;
   status: string;
@@ -16,8 +16,11 @@ type TaskInTwoDays = {
   isLoading: boolean
 }
 
-function InTwoDaysTaskList({ task, isOpen, toggleTaskDetails, fetchTasksInTwoDays,
- setTaskDetails, markTask, status, moveTaskToHistory, isLoading }: TaskInTwoDays) {
+function InTwoDaysTaskList({ task, isOpen, toggleTaskDetails,  setTaskDetails, 
+  markTask, status, moveTaskToHistory, isLoading }: TaskInTwoDays) {
+
+  const { tasksInTwoDays } = useTaskContext();
+  const { fetchTasks: fetchTasksInTwoDays } = tasksInTwoDays;
 
  const deleteTaskInTwoDays = async(): Promise<void> => {
   try{

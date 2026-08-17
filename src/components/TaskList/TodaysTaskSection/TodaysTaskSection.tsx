@@ -8,13 +8,12 @@ type TaskSections = {
  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
  taskStatus: Record<string, TaskStatusType>;
  markTask: (id:string, status: TaskStatusType) => void;
- fetchTasksToday: () => Promise<void>;
  moveTaskToHistory: (taskId: string, source: TaskSource) => Promise<void>;
  isLoading: boolean;
  tasksToday: Task[];
 };
 
-function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, tasksToday, fetchTasksToday, moveTaskToHistory, isLoading }: TaskSections ){
+function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, tasksToday, moveTaskToHistory, isLoading }: TaskSections ){
 
   return(
     <> 
@@ -30,9 +29,9 @@ function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, 
            const status = taskStatus[task.localId] || 'not marked';
 
            return(
-             <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} 
-               fetchTasksToday={fetchTasksToday} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-               markTask={markTask} status={status} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} 
+             <TodaysTaskList task={task} key={task.id} setTaskDetails={setTaskDetails} isOpen={isOpen} 
+               toggleTaskDetails={toggleTaskDetails} markTask={markTask} status={status} 
+               moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} 
                columnClass={index === 0 ? 'first-column' : ''} />
             )
            })

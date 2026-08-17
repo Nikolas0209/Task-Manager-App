@@ -7,14 +7,13 @@ type InTwoDaysTaskSections = {
   tasksInTwoDays: Task[];
   setTaskDetails:  React.Dispatch<React.SetStateAction<string | null>>;
   taskDetails: string | null;
-  fetchTasksInTwoDays: () => Promise<void>;
   markTask: (id:string, status: TaskStatusType) => void;
   taskStatus: Record<string, TaskStatusType>;
   moveTaskToHistory: (taskId: string, source: TaskSource) => void;
   isLoading: boolean;
 }
 
-function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, fetchTasksInTwoDays, tasksInTwoDays, moveTaskToHistory, isLoading }: InTwoDaysTaskSections){
+function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask, tasksInTwoDays, moveTaskToHistory, isLoading }: InTwoDaysTaskSections){
 
   return(
     <>
@@ -31,8 +30,8 @@ function InTwoDaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTas
                 
            return(
              <InTwoDaysTaskList key={task.id} isOpen={isOpen} toggleTaskDetails={toggleTaskDetails} 
-               task={task} fetchTasksInTwoDays={fetchTasksInTwoDays} setTaskDetails={setTaskDetails}
-                markTask={markTask} status={status} moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
+               task={task} setTaskDetails={setTaskDetails} markTask={markTask} status={status} 
+               moveTaskToHistory={moveTaskToHistory} isLoading={isLoading} />
             )
           })}
         </ul>
