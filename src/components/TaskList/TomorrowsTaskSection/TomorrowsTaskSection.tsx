@@ -14,8 +14,8 @@ type TodaysTaskSections = {
  isLoading: boolean
 }
 
-function TomorrowsTaskSection({ tasksTomorrow, taskDetails, setTaskDetails, taskStatus, fetchTasksTomorrow, markTask,  moveTaskToHistory, isLoading }: TodaysTaskSections ){
-
+function TomorrowsTaskSection({taskDetails, setTaskDetails, tasksTomorrow, taskStatus, fetchTasksTomorrow, markTask,  moveTaskToHistory, isLoading }: TodaysTaskSections ){
+  
   return(
     <>
       {tasksTomorrow.length === 0 ? <NoTasksAssigned /> : (

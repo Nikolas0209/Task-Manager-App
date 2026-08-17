@@ -6,10 +6,10 @@ import TaskInput from '../components/TaskInput/TaskInput';
 import TodaysTaskSection from '../components/TaskList/TodaysTaskSection/TodaysTaskSection';
 import TomorrowsTaskSection from '../components/TaskList/TomorrowsTaskSection/TomorrowsTaskSection';
 import InTwoDaysTaskSection from '../components/TaskList/InTwoDaysTaskSection/InTwoDaysTaskSection';
-import type { Task, TaskSource } from '../types/taskType';
+import type {TaskSource } from '../types/taskType';
 import type { TaskStatusType } from '../types/taskStatusType';
 import { useTasks } from '../hooks/useTasks';
-import { moveTaskToHistoryApi } from '../api/moveTaskToHistroryApi';
+import { moveTaskHistory } from '../utils/moveTaskHistory';
 
 function HomePage(){
   const navigate = useNavigate(); 
@@ -17,6 +17,7 @@ function HomePage(){
   const [taskDetails, setTaskDetails] = useState <string | null>(null);
   const [taskStatus, setTaskStatus] = useState<Record<string, TaskStatusType>>({});
   const [isLoading, setIsLoading] = useState <boolean>(false);
+  
   const { tasks: tasksToday, setTasks: setTasksToday, fetchTasks: fetchTasksToday } = 
    useTasks('https://692488a63ad095fb8474968f.mockapi.io/tasks');
   const { tasks: tasksTomorrow, setTasks: setTasksTomorrow, fetchTasks: fetchTasksTomorrow } = 
@@ -24,42 +25,10 @@ function HomePage(){
   const { tasks: tasksInTwoDays, setTasks: setTasksInTwoDays, fetchTasks: fetchTasksInTwoDays } = 
    useTasks('https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days');
  
-   const moveTaskToHistory = async(taskId: string, source: TaskSource): Promise<void> => {
-    let tasks: Task[];
-    let setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-    let url: string;
-
-    if(source === 'today'){
-      tasks = tasksToday;
-      setTasks = setTasksToday;
-      url = 'https://692488a63ad095fb8474968f.mockapi.io/tasks';
-    }else if(source === 'tomorrow'){
-      tasks = tasksTomorrow;
-      setTasks = setTasksTomorrow;
-      url = 'https://692488a63ad095fb8474968f.mockapi.io/tasks-tomorrow';
-    }else {
-      tasks = tasksInTwoDays;
-      setTasks = setTasksInTwoDays;
-      url = 'https://69288e25b35b4ffc50161e2b.mockapi.io/tasks-in-two-days';
-    }
-
-    const moveTask = tasks.find((foundTask: Task) => taskId === foundTask.id);
-    if(!moveTask) return;
-  
-    setIsLoading(true);
-  
-    try{
-     await moveTaskToHistoryApi({url, taskId, task: moveTask});
-     setTasks(prev => prev.filter((task: Task) => task.id !== taskId));
-    }
-    catch(error){
-      console.log('Could not move the task. Please try again later.', error);
-    }
-    finally{
-      setIsLoading(false);
-    }
+  const handleMoveTaskToHistory = (taskId: string, source: TaskSource): Promise<void> => {
+    return moveTaskHistory({ taskId, source, tasksToday, tasksTomorrow, tasksInTwoDays, setTasksToday,
+       setTasksTomorrow, setTasksInTwoDays, setIsLoading });
   };
-
 
   const toggleInstructions = (): void => {
     setIsInstructions(prev => !prev);
@@ -116,21 +85,21 @@ function HomePage(){
         <div className="task-manager-card">
           <TodaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} tasksToday={tasksToday} 
-             fetchTasksToday={fetchTasksToday} moveTaskToHistory={moveTaskToHistory} 
+             fetchTasksToday={fetchTasksToday} moveTaskToHistory={handleMoveTaskToHistory} 
              isLoading={isLoading} />
         </div>
       
         <div className="task-manager-card task-manager-card-tomorrow">
-          <TomorrowsTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
-             setTaskDetails={setTaskDetails} markTask={markTask} tasksTomorrow={tasksTomorrow} 
-             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={moveTaskToHistory} 
+          <TomorrowsTaskSection taskDetails={taskDetails} setTaskDetails={setTaskDetails} 
+             taskStatus={taskStatus} markTask={markTask} tasksTomorrow={tasksTomorrow} 
+             fetchTasksTomorrow={fetchTasksTomorrow} moveTaskToHistory={handleMoveTaskToHistory} 
              isLoading={isLoading} />
         </div>
 
         <div className="task-manager-card">
           <InTwoDaysTaskSection taskDetails={taskDetails} taskStatus={taskStatus} 
              setTaskDetails={setTaskDetails} markTask={markTask} tasksInTwoDays={tasksInTwoDays}
-             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={moveTaskToHistory}
+             fetchTasksInTwoDays={fetchTasksInTwoDays} moveTaskToHistory={handleMoveTaskToHistory}
              isLoading={isLoading} />
         </div>
 
