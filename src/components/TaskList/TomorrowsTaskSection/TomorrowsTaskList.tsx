@@ -1,23 +1,13 @@
 import '../TaskList.css';
-import type { Task } from '../../../types/taskType';
 import axios from 'axios';
 import TaskDetails from '../../TaskDetails/TaskDetails';
-import type { TaskStatusType } from '../../../types/taskStatusType';
 import { useTaskContext } from '../../../context/useTaskContext';
 import { useState } from 'react';
 import { moveTaskHistory } from '../../../utils/moveTaskHistory';
-
-type TaskTomorrow = {
-  task: Task;
-  isOpen: boolean;
-  setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
-  toggleTaskDetails: () => void;
-  markTask: (id:string, status: TaskStatusType) => void;
-  status: string;
-}
+import type { TaskList } from '../../../types/taskListType';
 
 function TomorrowsTaskList({ task, isOpen, toggleTaskDetails, setTaskDetails,  
-  markTask, status }: TaskTomorrow){
+  markTask, status }: TaskList){
   const [isLoading, setIsLoading] = useState <boolean>(false);
   const { tasksTomorrow } = useTaskContext();
   const { fetchTasks: fetchTasksTomorrow, setTasks: setTasksTomorrow } = tasksTomorrow;
