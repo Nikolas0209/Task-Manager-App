@@ -6,7 +6,7 @@ import checkedTask from '../../assets/check.png';
 import uncheckedTask from '../../assets/close.png';
 import type { TaskStatusType } from '../../types/taskStatusType';
  
-type TaskDetails = {
+type TaskDetailsProps = {
   task: Task;
   onDelete: () => Promise<void>;
   markTask: (id:string, status: TaskStatusType) => void;
@@ -15,7 +15,7 @@ type TaskDetails = {
   handleMoveTaskToHistory: () => Promise<void>;
 }
 
-function TaskDetails({ task, onDelete, markTask, isLoading, columnClass, handleMoveTaskToHistory }: TaskDetails){ 
+function TaskDetails({ task, onDelete, markTask, isLoading, columnClass, handleMoveTaskToHistory }: TaskDetailsProps){ 
  
  return(
    <div className={`task-details ${columnClass || ''}`}>

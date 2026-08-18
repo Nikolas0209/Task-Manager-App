@@ -11,7 +11,7 @@ type TaskSections = {
 };
 
 function TodaysTaskSection({ taskDetails, setTaskDetails, taskStatus, markTask }: TaskSections ){
-  const {tasksToday: { tasks: tasksToday }} = useTaskContext()
+  const {tasksToday: { tasks: tasksToday }} = useTaskContext();
 
   return(
     <> 

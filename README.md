@@ -56,8 +56,7 @@ npm run dev
 
 ## Project Status
 
-🚧 **In progress**  
-Currently working on optimization for better efficiency.
+- The project is considered finished.
 
 ---
 
