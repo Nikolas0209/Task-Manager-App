@@ -1,16 +1,9 @@
 import NoTasksAssigned from "../../NoTasksAssigned/NoTasksAssigned";
 import TomorrowsTaskList from "./TomorrowsTaskList";
-import type { TaskStatusType } from '../../../types/taskStatusType';
 import { useTaskContext } from "../../../context/useTaskContext";
+import type { TaskSection } from "../../../types/taskSectionType";
  
-type TodaysTaskSections = {
- taskDetails: string | null;
- setTaskDetails: React.Dispatch<React.SetStateAction<string | null>>;
- taskStatus: Record<string, TaskStatusType>;
- markTask: (id:string, status: TaskStatusType) => void;
-}
-
-function TomorrowsTaskSection({taskDetails, setTaskDetails, taskStatus, markTask }: TodaysTaskSections ){
+function TomorrowsTaskSection({taskDetails, setTaskDetails, taskStatus, markTask }: TaskSection ){
   const { tasksTomorrow: { tasks: tasksTomorrow }} = useTaskContext();
 
   return(
